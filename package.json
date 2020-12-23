@@ -1,0 +1,23 @@
+{
+  "name": "b-inder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/a-heo/b-inder.git"
+  },
+  "author": "heo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/a-heo/b-inder/issues"
+  },
+  "homepage": "https://github.com/a-heo/b-inder#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "react": "^17.0.1"
+  }
+}
