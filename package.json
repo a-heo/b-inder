@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/index.js",
+    "build": "webpack --config webpack.config.js --watch"
   },
   "repository": {
     "type": "git",
@@ -17,7 +19,19 @@
   },
   "homepage": "https://github.com/a-heo/b-inder#readme",
   "dependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "axios": "^0.21.1",
+    "babel-loader": "^8.2.2",
     "express": "^4.17.1",
-    "react": "^17.0.1"
+    "nodemon": "^2.0.6",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "body-parser": "^1.19.0",
+    "webpack": "^5.11.0",
+    "webpack-cli": "^4.2.0"
   }
 }
