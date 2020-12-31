@@ -11,15 +11,13 @@ const Signin = styled.button`
     border: 2px #70af85; 
     border-radius: 5px;
     width: auto; 
+    cursor:pointer; 
 `;
 
-const Login = () => {
-
-    return (
-        <div>
-            <Signin>Login</Signin> 
-        </div>
-    )
-}
+const Login = () => (
+  <div>
+    <Signin>Login</Signin>
+  </div>
+);
 
 export default Login;

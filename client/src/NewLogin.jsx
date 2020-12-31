@@ -14,12 +14,10 @@ const Button = styled.button`
     width: auto;
 `;
 
-const NewLogin = () => {
-    return (
-        <div>
-        <Button>Sign Up</Button>
-        </div>
-    );
-}
+const NewLogin = () => (
+  <div>
+    <Button>Sign Up</Button>
+  </div>
+);
 
 export default NewLogin;
