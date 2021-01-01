@@ -30,13 +30,15 @@ const App = () => {
   const loadSlider = (genre) => {
     axios.get(`api/books/${genre}`)
       .then((response) => {
-        setData((data) => data.concat(response.data));
+        console.log(response.data.length, 'length');
+        setData(response.data);
       })
       .catch((error) => {
         console.log(error, 'loadslider unable to be retrieve');
       });
   };
-
+  
+  console.log('inside data', data);
   return (
     <div>
       {slider ? <Genres data={data} />

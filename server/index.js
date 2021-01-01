@@ -4,7 +4,7 @@ const db = require('../database/controller/index.js');
 const API_KEY = require('./config/api.js');
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 app.use(express.static('client/dist'));
 
@@ -12,7 +12,7 @@ app.use(express.static('client/dist'));
 app.get('/api/books/:genre', (req, res) => {
   let genreUrl = '';
   if (req.params.genre === 'juvenile') {
-    genreUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:"juvenile+fiction"+inpublisher:"random+house"&orderBy=newest&printType=books&langRestrict=en&key=${API_KEY}`;
+    genreUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:"juvenile+fiction"+inpublisher:"random+house"&orderBy=newest&printType=books&langRestrict=en&maxResults=40&key=${API_KEY}`;
   }
   if (req.params.genre === 'fiction') {
     genreUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:"fiction"+inpublisher:"riverhead"&orderBy=newest&printType=books&langRestrict=en&key=${API_KEY}`;
