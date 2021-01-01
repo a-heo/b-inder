@@ -13,6 +13,8 @@ const Body = styled.div`
     flex-direction: column;
     font-family: 'bungee';
     color: #433D3C;
+    width: 100%;
+    height: 100%;
 `;
 
 const Title = styled.h1`
@@ -37,8 +39,7 @@ const App = () => {
         console.log(error, 'loadslider unable to be retrieve');
       });
   };
-  
-  console.log('inside data', data);
+
   return (
     <div>
       {slider ? <Genres data={data} />

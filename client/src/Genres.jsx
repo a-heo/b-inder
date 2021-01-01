@@ -8,17 +8,16 @@ const Genres = ({ loadSlider, data }) => {
   const handleClick = (e) => {
     changeGenre(e.target.name);
     clickButton(true);
-    console.log('clicked');
   };
 
   useEffect(() => {
-    if (button === true) {
+    if (button) {
+      console.log('useeffect in effect');
       loadSlider(genre);
     }
-  });
+  }, [genre]);
 
-  console.log(genre, button, 'info', data.length);
-
+  console.log(genre, button, 'info in genres', data.length);
 
   return (
     <div>

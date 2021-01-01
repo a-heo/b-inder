@@ -1,10 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const Box = styled.div`
+    display:flex; 
+    justify-content: center;
+`;
+
 const Button = styled.button`
     display: flex;
     justify-content: space-between; 
-    align-items: center;
     text-align: center;
     background-color: #83A95C;
     border: 2px; 
@@ -16,9 +20,9 @@ const Button = styled.button`
 `;
 
 const SignIn = () => (
-  <div>
+  <Box>
     <Button>Login</Button>
-  </div>
+  </Box>
 );
 
 export default SignIn;

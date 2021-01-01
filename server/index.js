@@ -12,7 +12,7 @@ app.use(express.static('client/dist'));
 app.get('/api/books/:genre', (req, res) => {
   let genreUrl = '';
   if (req.params.genre === 'juvenile') {
-    genreUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:"juvenile+fiction"+inpublisher:"random+house"&orderBy=newest&printType=books&langRestrict=en&maxResults=40&key=${API_KEY}`;
+    genreUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:"juvenile+fiction"+inpublisher:"random+house"&orderBy=newest&printType=books&langRestrict=en&maxResults=40&zoom=3&key=${API_KEY}`;
   }
   if (req.params.genre === 'fiction') {
     genreUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:"fiction"+inpublisher:"riverhead"&orderBy=newest&printType=books&langRestrict=en&key=${API_KEY}`;
@@ -32,7 +32,6 @@ app.get('/api/books/:genre', (req, res) => {
 
   axios.get(genreUrl)
     .then((data) => {
-      console.log(data.data);
       res.send(data.data.items);
     })
     .catch((error) => {
