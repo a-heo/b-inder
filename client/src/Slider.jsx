@@ -3,30 +3,24 @@ import Book from './Book';
 
 const Slider = ({ data }) => {
   const [books, setBooks] = useState([]);
-  const [length, newLength] = useState(0);
   const [carousel, startCarousel] = useState(false);
 
   useEffect(() => {
-    const setSlider = (query) => {
+    const setSlider = (query, callback) => {
       setBooks(query);
-      newLength(query.length);
+      callback();
     };
-    setSlider(data);
-    startCarousel(true);
+    setSlider(data, () => {
+      if (data.length > 0) {
+        startCarousel(true);
+      }
+    });
   }, [data]);
-
-
-  // if (data.length) {
-  //   startCarousel(true);
-  //   console.log('slider info changes', bool);
-  // };
 
   return (
     <div>
-      {carousel ? (books.map((item) => {
-        <Book key={item.id} item={item.volumeInfo} />
-      })
-      )
+      { carousel ?
+        <Book item={books[0].volumeInfo} />
         : null
       }
     </div>

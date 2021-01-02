@@ -24,6 +24,11 @@ const Title = styled.h1`
     color: #f18c8e;
 `;
 
+const Box = styled.div`
+    display:flex; 
+    justify-content: center;
+`;
+
 const App = () => {
   const [login, enterLogin] = useState(false);
   const [data, setData] = useState([]);
@@ -32,7 +37,6 @@ const App = () => {
   const loadSlider = (genre) => {
     axios.get(`api/books/${genre}`)
       .then((response) => {
-        console.log(response.data.length, 'length');
         setData(response.data);
       })
       .catch((error) => {
@@ -47,8 +51,10 @@ const App = () => {
           <Body>
             <Login />
             <Title>b-inder</Title>
-            <NewLogin />
-            <SignIn />
+            <Box>
+              <NewLogin />
+              <SignIn />
+            </Box>
             <Genres data={data} loadSlider={loadSlider} />
           </Body>
         )}

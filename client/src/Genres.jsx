@@ -12,12 +12,9 @@ const Genres = ({ loadSlider, data }) => {
 
   useEffect(() => {
     if (button) {
-      console.log('useeffect in effect');
       loadSlider(genre);
     }
   }, [genre]);
-
-  console.log(genre, button, 'info in genres', data.length);
 
   return (
     <div>

@@ -23,4 +23,5 @@ module.exports = {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     camelcase: ['error'],
   },
+  "parser": "babel-eslint"
 };
