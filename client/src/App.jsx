@@ -32,7 +32,6 @@ const Box = styled.div`
 const App = () => {
   const [login, enterLogin] = useState(false);
   const [data, setData] = useState([]);
-  const [slider, startSlider] = useState(false);
 
   const loadSlider = (genre) => {
     axios.get(`api/books/${genre}`)
@@ -46,7 +45,13 @@ const App = () => {
 
   return (
     <div>
-      {slider ? <Genres data={data} />
+      {login ? (
+        <Body>
+            <Login />
+            <Title>b-inder</Title>
+            <Genres data={data} loadSlider={loadSlider} />
+        </Body>
+      )
         : (
           <Body>
             <Login />

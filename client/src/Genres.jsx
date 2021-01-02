@@ -16,53 +16,61 @@ const Genres = ({ loadSlider, data }) => {
     }
   }, [genre]);
 
+  const changeGenres = () => {
+    clickButton(false);
+  };
+
   return (
     <div>
-      {button ? <Slider data={data} />
+      {button ? <Slider data={data} click={changeGenres} />
         : (
           <div>
-            <button
-              type="button"
-              name="fiction"
-              onClick={handleClick}
-            >
-              Fiction
-            </button>
-            <button
-              type="button"
-              name="juvenile"
-              onClick={handleClick}
-            >
-              Children's
-            </button>
-            <button
-              type="button"
-              name="youngadult"
-              onClick={handleClick}
-            >
-              Young Adult
-            </button>
-            <button
-              type="button"
-              name="graphic"
-              onClick={handleClick}
-            >
-              Graphic Novels
-            </button>
-            <button
-              type="button"
-              name="mystery"
-              onClick={handleClick}
-            >
-              Mystery
-            </button>
-            <button
-              type="button"
-              name="fantasy"
-              onClick={handleClick}
-            >
-              Fantasy
-            </button>
+            <div>
+              <button
+                type="button"
+                name="fiction"
+                onClick={handleClick}
+              >
+                Fiction
+              </button>
+              <button
+                type="button"
+                name="juvenile"
+                onClick={handleClick}
+              >
+                Children's
+              </button>
+              <button
+                type="button"
+                name="youngadult"
+                onClick={handleClick}
+              >
+                Young Adult
+              </button>
+            </div>
+            <div>
+              <button
+                type="button"
+                name="graphic"
+                onClick={handleClick}
+              >
+                Graphic Novels
+              </button>
+              <button
+                type="button"
+                name="mystery"
+                onClick={handleClick}
+              >
+                Mystery
+              </button>
+              <button
+                type="button"
+                name="fantasy"
+                onClick={handleClick}
+              >
+                Fantasy
+              </button>
+            </div>
           </div>
         )}
     </div>

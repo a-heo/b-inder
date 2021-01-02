@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Book from './Book';
 
-const Slider = ({ data }) => {
+const Slider = ({ data, click }) => {
   const [books, setBooks] = useState([]);
   const [carousel, startCarousel] = useState(false);
 
@@ -17,12 +17,20 @@ const Slider = ({ data }) => {
     });
   }, [data]);
 
+  const handleClick = () => {
+    click();
+  };
+
   return (
     <div>
-      { carousel ?
-        <Book item={books[0].volumeInfo} />
-        : null
-      }
+      { carousel
+        ? (
+          <div>
+            <button type="button" onClick={handleClick}>Change Genre</button>
+            <Book item={books[0].volumeInfo} />
+          </div>
+        )
+        : null}
     </div>
   );
 };
