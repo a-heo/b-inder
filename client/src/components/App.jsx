@@ -30,13 +30,16 @@ const Box = styled.div`
 `;
 
 const App = () => {
-  const [login, enterLogin] = useState(false);
+  const [login, enterLogin] = useState(true);
   const [data, setData] = useState([]);
 
   const loadSlider = (genre) => {
     axios.get(`api/books/${genre}`)
       .then((response) => {
-        setData(response.data);
+        // filter data with only those that have volumeinfo
+        const books = response.data.filter((book) =>
+          book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail);
+        setData(books);
       })
       .catch((error) => {
         console.log(error, 'loadslider unable to be retrieve');
@@ -47,9 +50,9 @@ const App = () => {
     <div>
       {login ? (
         <Body>
-            <Login />
-            <Title>b-inder</Title>
-            <Genres data={data} loadSlider={loadSlider} />
+          <Login />
+          <Title>b-inder</Title>
+          <Genres data={data} loadSlider={loadSlider} />
         </Body>
       )
         : (

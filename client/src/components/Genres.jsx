@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Slider from './Slider';
+import BookContainer from './BookContainer';
 
 const Genres = ({ loadSlider, data }) => {
   const [button, clickButton] = useState(false);
@@ -22,7 +22,7 @@ const Genres = ({ loadSlider, data }) => {
 
   return (
     <div>
-      {button ? <Slider data={data} click={changeGenres} />
+      {button ? <BookContainer data={data} click={changeGenres} />
         : (
           <div>
             <div>
