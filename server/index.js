@@ -4,38 +4,54 @@ const db = require('../database/controller/index.js');
 const API_KEY = require('./config/api.js');
 
 const app = express();
-const port = 3000; 
-
+const port = 3001;
 
 app.use(express.static('client/dist'));
 
-//get book info
-app.get('/api/books', (req, res) => {
-  axios.get(`https://www.googleapis.com/books/v1/volumes?q=subject:"fiction"+inpublisher:"riverhead"&orderBy=newest&printType=books&langRestrict=en&key=${API_KEY}`)
+// get book info
+app.get('/api/books/:genre', (req, res) => {
+  let genreUrl = '';
+  if (req.params.genre === 'juvenile') {
+    genreUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:"juvenile+fiction"+inpublisher:"random+house"&orderBy=newest&printType=books&langRestrict=en&maxResults=40&zoom=3&key=${API_KEY}`;
+  }
+  if (req.params.genre === 'fiction') {
+    genreUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:"fiction"+inpublisher:"riverhead"&orderBy=newest&printType=books&langRestrict=en&maxResults=40&key=${API_KEY}`;
+  }
+  if (req.params.genre === 'graphic') {
+    genreUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:"graphic+novels"&orderBy=newest&printType=books&langRestrict=en&maxResults=40&key=${API_KEY}`;
+  }
+  if (req.params.genre === 'mystery') {
+    genreUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:"mystery"&orderBy=newest&printType=books&langRestrict=en&maxResults=40&key=${API_KEY}`;
+  }
+  if (req.params.genre === 'fantasy') {
+    genreUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:"fantasy"&orderBy=newest&printType=books&langRestrict=en&maxResults=40&key=${API_KEY}`;
+  }
+  if (req.params.genre === 'youngadult') {
+    genreUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:"young+adult+fiction"&orderBy=newest&printType=books&langRestrict=en&maxResults=40&key=${API_KEY}`;
+  }
+
+  axios.get(genreUrl)
     .then((data) => {
-        console.log(data.data);
-        res.send(data.data);
+      res.send(data.data.items);
     })
-    .catch(error => {
-        console.log('error');
-        res.status(404);
-    })
-})
-
-//get book info for specific user
-
-//post user info
-app.post('/app/books', (req, res) => {
-    let query = `INSERT INTO `
-    db.addInfo()
+    .catch((error) => {
+      console.log('error', error);
+      res.status(404);
+    });
 });
 
-//put book info for specific user
+// get book info for specific user
 
+// post user info
+app.post('/app/books', (req, res) => {
+  const query = 'INSERT INTO ';
+  db.addInfo();
+});
 
+// put book info for specific user
 
 app.listen(port, () => {
-    console.log(`app listening at http://localhost:${port}`);
+  console.log(`app listening at http://localhost:${port}`);
 });
 
 /*

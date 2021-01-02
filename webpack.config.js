@@ -1,11 +1,11 @@
-const path = require('path')
+const path = require('path');
 
 module.exports = {
   entry: path.resolve(__dirname, 'client/src', 'index.js'),
   mode: 'production',
   output: {
     path: path.resolve(__dirname, 'client/dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   module: {
     rules: [
@@ -18,16 +18,16 @@ module.exports = {
           options: {
             presets: [
               ['@babel/preset-env', {
-                "targets": "defaults" 
+                targets: 'defaults',
               }],
-              '@babel/preset-react'
-            ]
-          }
-        }]
-      }
-    ]
+              '@babel/preset-react',
+            ],
+          },
+        }],
+      },
+    ],
   },
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-}
+};
