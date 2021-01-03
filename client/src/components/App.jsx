@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+
+import { createGlobalStyle } from 'styled-components';
 import styled from 'styled-components';
 import Login from './Login';
 import NewLogin from './NewLogin';
@@ -7,25 +9,33 @@ import Genres from './Genres';
 
 const axios = require('axios');
 
-const Body = styled.div`
+const GlobalStyle = createGlobalStyle`
+  body {
     background-color: #FCF8E8;
     display: flex;
     flex-direction: column;
     font-family: 'bungee';
     color: #433D3C;
-    width: 100%;
-    height: 100%;
+  }
+  button {
+    font-family: 'bungee';
+    font-size: 25px;
+    width: auto; 
+    cursor:pointer; 
+    background-color: #83A95C;
+    font-size: 24px; 
+    border: 2px #70af85; 
+    border-radius: 5px;
+  }
 `;
 
 const Title = styled.h1`
-    font-family: 'bungee';
     font-size: 125px; 
     text-align: center;
     color: #f18c8e;
 `;
 
 const Box = styled.div`
-    display:flex; 
     justify-content: center;
 `;
 
@@ -37,8 +47,9 @@ const App = () => {
     axios.get(`api/books/${genre}`)
       .then((response) => {
         // filter data with only those that have volumeinfo
-        const books = response.data.filter((book) =>
-          book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail);
+        const books =
+          response.data.filter((book) =>
+            book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail);
         setData(books);
       })
       .catch((error) => {
@@ -48,15 +59,16 @@ const App = () => {
 
   return (
     <div>
+      <GlobalStyle />
       {login ? (
-        <Body>
+        <div>
           <Login />
           <Title>b-inder</Title>
           <Genres data={data} loadSlider={loadSlider} />
-        </Body>
+        </div>
       )
         : (
-          <Body>
+          <div>
             <Login />
             <Title>b-inder</Title>
             <Box>
@@ -64,7 +76,7 @@ const App = () => {
               <SignIn />
             </Box>
             <Genres data={data} loadSlider={loadSlider} />
-          </Body>
+          </div>
         )}
     </div>
   );

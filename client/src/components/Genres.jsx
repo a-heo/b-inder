@@ -1,5 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+
 import BookContainer from './BookContainer';
+
+const GenreLocation = styled.div`
+  justify-content: space-around;
+  text-align: center;
+`;
+
+const Button = styled.button`
+  background-color: #70af85;
+  color: #FCF8E8;
+  border: 2px #70af85; 
+  border-radius: 5px;
+`;
 
 const Genres = ({ loadSlider, data }) => {
   const [button, clickButton] = useState(false);
@@ -24,54 +38,54 @@ const Genres = ({ loadSlider, data }) => {
     <div>
       {button ? <BookContainer data={data} click={changeGenres} />
         : (
-          <div>
+          <GenreLocation>
             <div>
-              <button
+              <Button
                 type="button"
                 name="fiction"
                 onClick={handleClick}
               >
                 Fiction
-              </button>
-              <button
+              </Button>
+              <Button
                 type="button"
                 name="juvenile"
                 onClick={handleClick}
               >
                 Children's
-              </button>
-              <button
+              </Button>
+              <Button
                 type="button"
                 name="youngadult"
                 onClick={handleClick}
               >
                 Young Adult
-              </button>
+              </Button>
             </div>
             <div>
-              <button
+              <Button
                 type="button"
                 name="graphic"
                 onClick={handleClick}
               >
                 Graphic Novels
-              </button>
-              <button
+              </Button>
+              <Button
                 type="button"
                 name="mystery"
                 onClick={handleClick}
               >
                 Mystery
-              </button>
-              <button
+              </Button>
+              <Button
                 type="button"
                 name="fantasy"
                 onClick={handleClick}
               >
                 Fantasy
-              </button>
+              </Button>
             </div>
-          </div>
+          </GenreLocation>
         )}
     </div>
   );
