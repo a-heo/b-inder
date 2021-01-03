@@ -41,20 +41,28 @@ app.get('/api/books/:genre', (req, res) => {
 });
 
 // get book info for specific user
-app.get('api/user/:username/:password', (req, res) => {
+app.get('/api/user/:username/:pw', (req, res) => {
   const { username } = req.params;
   const { pw } = req.params;
-  const query = `SELECT * FROM userbooks WHERE users.username = ${username} and users.pw = ${pw}`;
-  db.getInfo();
+  const query = `SELECT * FROM userbooks LEFT JOIN users on users.id = userbooks.userid WHERE users.username = '${username}' and users.pw = '${pw}'`;
+  db.getInfo(query, (result) => {
+    res.send(result);
+  });
 });
 
 // post user info
-app.post('/app/books', (req, res) => {
-  const query = 'INSERT INTO ';
-  db.addInfo();
+app.post('/api/:username/:pw', (req, res) => {
+  const { username } = req.params;
+  const { pw } = req.params;
+  const query = 'INSERT INTO users (username, pw) values ($1, $2)';
+  const values = [username, pw];
+  db.addInfo(query, values, res);
 });
 
 // put book info for specific user
+app.post('api/user/:info', (req, res) => {
+  
+});
 
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);

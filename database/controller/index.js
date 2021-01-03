@@ -4,6 +4,7 @@ const getInfo = (query, callback) => {
   pool
     .query(query)
     .then((res) => {
+        console.log(res.rows);
       callback(res.rows);
     })
     .catch((e) => {
@@ -11,11 +12,15 @@ const getInfo = (query, callback) => {
     });
 };
 
-const addInfo = (query, values, callback) => {
+const addInfo = (query, values, res) => {
   pool
     .query(query, values)
-    .then((res) => {
-      callback(res.rows);
+    .then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((e) => {
+      console.log(e);
+      res.sendStatus(500);
     });
 };
 

@@ -59,6 +59,10 @@ const App = () => {
       });
   };
 
+  const loadUserInfo = (info) => {
+    axios.get(`api/books/`)
+  }
+
   const gatherUserInfo = (username) => {
     axios.get(`api/user/${username}`)
       .then((response) => {
