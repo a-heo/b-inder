@@ -41,6 +41,12 @@ app.get('/api/books/:genre', (req, res) => {
 });
 
 // get book info for specific user
+app.get('api/user/:username/:password', (req, res) => {
+  const { username } = req.params;
+  const { pw } = req.params;
+  const query = `SELECT * FROM userbooks WHERE users.username = ${username} and users.pw = ${pw}`;
+  db.getInfo();
+});
 
 // post user info
 app.post('/app/books', (req, res) => {

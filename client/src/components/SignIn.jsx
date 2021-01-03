@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import LoginModal from './LoginModal';
 
 const Button = styled.button`
     display: flex;
@@ -14,10 +15,29 @@ const Button = styled.button`
     width: auto;
 `;
 
-const SignIn = () => (
-  <div>
-    <Button>Login</Button>
-  </div>
-);
+const SignIn = ({ login, enterLogin }) => {
+  const [modal, setModal] = useState(false);
+
+  const handleClick = () => {
+    setModal(!modal);
+  };
+
+  return (
+    <div>
+      <Button>Sign Up</Button>
+      {modal
+        ? (
+          <LoginModal
+            modal={modal}
+            setModal={setModal}
+            changeModal={handleClick}
+            login={login}
+            enterLogin={enterLogin}
+          />
+        )
+        : null}
+    </div>
+  );
+};
 
 export default SignIn;

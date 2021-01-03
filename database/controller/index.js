@@ -21,4 +21,5 @@ const addInfo = (query, values, callback) => {
 
 module.exports = {
   getInfo,
+  addInfo,
 };

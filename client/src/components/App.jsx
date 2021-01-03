@@ -40,8 +40,10 @@ const Box = styled.div`
 `;
 
 const App = () => {
-  const [login, enterLogin] = useState(true);
+  const [login, enterLogin] = useState(false);
   const [data, setData] = useState([]);
+  const [user, changeUser] = useState('');
+  const [userBooks, changeUserBooks] = useState([]);
 
   const loadSlider = (genre) => {
     axios.get(`api/books/${genre}`)
@@ -57,19 +59,30 @@ const App = () => {
       });
   };
 
+  const gatherUserInfo = (username) => {
+    axios.get(`api/user/${username}`)
+      .then((response) => {
+        changeUserBooks(response.data);
+        changeUser(username);
+      })
+      .catch((error) => {
+        console.log(error, 'userinfo unable to be retrieved');
+      });
+  };
+
   return (
     <div>
       <GlobalStyle />
       {login ? (
         <div>
-          <Login />
+          <Login login={login} enterLogin={enterLogin} />
           <Title>b-inder</Title>
           <Genres data={data} loadSlider={loadSlider} />
         </div>
       )
         : (
           <div>
-            <Login />
+            <Login login={login} enterLogin={enterLogin} />
             <Title>b-inder</Title>
             <Box>
               <NewLogin />

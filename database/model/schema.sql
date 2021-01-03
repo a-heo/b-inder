@@ -1,24 +1,30 @@
-CREATE DATABASE IF NOT EXISTS b-inder;
 
-\c b-inder
+CREATE DATABASE binder;
 
-CREATE TABLE IF NOT EXISTS users (
+\c binder;
+
+CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    user VARCHAR(15) NOT NULL,
-    pw VARCHAR(15) NOT NULL CHECK,
-    UNIQUE (user)
-)
+    username VARCHAR (10) UNIQUE,
+    pw VARCHAR (15),
+    CONSTRAINT user_pw_notnull CHECK (
+    NOT (
+        ( username is NULL or username = '' )
+        AND
+        ( pw is NULL or pw = '' )
+        )
+   )
+);
 
-CREATE TABLE IF NOT EXISTS userbooks (
+CREATE TABLE userbooks (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER NOT NULL,
-        CONSTRAINT user_fk
-        FOREIGN KEY (user_id)
-        REFERENCES users(id),
+    userid INTEGER NOT NULL,
     isbn VARCHAR,
     liked BOOLEAN,
     disliked BOOLEAN,
-    read BOOLEAN,
+    readbook BOOLEAN,
     unread BOOLEAN,
-)
-
+        CONSTRAINT user_fk
+        FOREIGN KEY (userid)
+        REFERENCES users(id)
+);
