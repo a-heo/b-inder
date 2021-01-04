@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 
-import UpperHeader from './UpperHeader';
-import Genres from './Genres';
 import LoginModal from './LoginModal';
+import UpperHeader from './UpperHeader';
 import SignInContainer from './SignInContainer';
+import CenterContainer from './CenterContainer';
 
 const axios = require('axios');
 
@@ -40,6 +40,7 @@ const App = () => {
   const [userpw, updateUserPW] = useState('');
   const [userBooks, changeUserBooks] = useState([]);
   const [modal, setModal] = useState(false);
+  const [list, setList] = useState(false);
 
   const loadSlider = (genre) => {
     axios.get(`api/books/${genre}`)
@@ -102,16 +103,22 @@ const App = () => {
       {login ? (
         <div>
           <UpperHeader
-            userBooks={userBooks}
-            user={user}
             login={login}
             enterLogin={enterLogin}
             loadUserInfo={loadUserInfo}
             modal={modal}
             setModal={setModal}
+            list={list}
+            setList={setList}
           />
-          <Title>b-inder</Title>
-          <Genres data={data} loadSlider={loadSlider} saveBookInfo={saveBookInfo} />
+          <CenterContainer
+            data={data}
+            loadSlider={loadSlider}
+            saveBookInfo={saveBookInfo}
+            userBooks={userBooks}
+            user={user}
+            list={list}
+          />
         </div>
       )
         : (

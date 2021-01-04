@@ -12,8 +12,8 @@ const Header = styled.div`
 `;
 
 const UpperHeader = ({
-  userBooks,
-  user,
+  list,
+  setList,
   login,
   enterLogin,
   loadUserInfo,
@@ -24,7 +24,7 @@ const UpperHeader = ({
     {login
       ? (
         <Header>
-          <CheckList userBooks={userBooks} user={user} />
+          <CheckList list={list} setList={setList} />
           <Login
             login={login}
             enterLogin={enterLogin}
