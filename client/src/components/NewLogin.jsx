@@ -9,7 +9,7 @@ const Button = styled.button`
 
 const NewLogin = () => (
   <div>
-    <Button>Login</Button>
+    <Button>Sign Up</Button>
   </div>
 );
 

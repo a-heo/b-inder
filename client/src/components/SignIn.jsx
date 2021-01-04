@@ -15,7 +15,7 @@ const Button = styled.button`
     width: auto;
 `;
 
-const SignIn = ({ login, enterLogin }) => {
+const SignIn = ({ login, enterLogin, loadUserInfo }) => {
   const [modal, setModal] = useState(false);
 
   const handleClick = () => {
@@ -24,7 +24,6 @@ const SignIn = ({ login, enterLogin }) => {
 
   return (
     <div>
-      <Button>Sign Up</Button>
       {modal
         ? (
           <LoginModal
@@ -33,9 +32,11 @@ const SignIn = ({ login, enterLogin }) => {
             changeModal={handleClick}
             login={login}
             enterLogin={enterLogin}
+            loadUserInfo={loadUserInfo}
           />
         )
         : null}
+        <Button onClick={handleClick}>Log In</Button>
     </div>
   );
 };

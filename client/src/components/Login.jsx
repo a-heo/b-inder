@@ -24,6 +24,9 @@ const Login = ({ login, enterLogin, loadUserInfo }) => {
 
   const handleClick = () => {
     setModal(!modal);
+    if (modal) {
+      enterLogin(false);
+    }
   };
 
   return (

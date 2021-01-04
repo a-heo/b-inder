@@ -1,6 +1,8 @@
 const express = require('express');
 const axios = require('axios');
 const path = require('path');
+var bodyParser = require('body-parser')
+
 const db = require('../database/controller/index.js');
 const API_KEY = require('./config/api.js');
 
@@ -12,6 +14,7 @@ const PUBLIC_DIR = path.resolve(__dirname, '..', 'client/dist');
 // app.use(express.static('client/dist'));
 
 app.use('/', express.static(PUBLIC_DIR));
+app.use(bodyParser.json());
 
 // get book info
 app.get('/api/books/:genre', (req, res) => {
@@ -49,13 +52,13 @@ app.get('/api/books/:genre', (req, res) => {
 app.get('/api/user/:username/:pw', (req, res) => {
   const { username } = req.params;
   const { pw } = req.params;
-  const query = `SELECT * FROM userbooks LEFT JOIN users on users.id = userbooks.userid WHERE users.username = '${username}' and users.pw = '${pw}'`;
+  const query = `SELECT * FROM userbooks FULL JOIN users on users.id = userbooks.userid WHERE users.username = '${username}' and users.pw = '${pw}'`;
   db.getInfo(query, (result) => {
     res.send(result);
   });
 });
 
-// post user info
+// make new user info
 app.post('/api/:username/:pw', (req, res) => {
   const { username } = req.params;
   const { pw } = req.params;
@@ -65,8 +68,20 @@ app.post('/api/:username/:pw', (req, res) => {
 });
 
 // put book info for specific user
-app.post('api/user/:info', (req, res) => {
-
+app.post('/api/:id/books/storeInfo', (req, res) => {
+  const { id } = req.params;
+  const query = 'INSERT INTO userbooks (userid, isbn, title, author, published, description, image, liked) values ($1, $2, $3, $4, $5, $6, $7, $8)';
+  const values = [
+    id,
+    req.body.ibsn,
+    req.body.title,
+    req.body.author,
+    req.body.published,
+    req.body.description,
+    req.body.image,
+    req.body.liked,
+  ];
+  db.addInfo(query, values, res);
 });
 
 app.listen(port, () => {
@@ -99,6 +114,6 @@ black
 https://www.googleapis.com/books/v1/volumes?q=subject:"african+american+fiction"&orderBy=newest&printType=books&langRestrict=en&key=${API_KEY}
 
 searchbyibsn
-https://www.googleapis.com/books/v1/volumes?q=isbn:9780593181478&key=${API_KEY}
+https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}&key=${API_KEY}
 
 */

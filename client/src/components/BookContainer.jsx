@@ -41,7 +41,7 @@ const Image = styled.img`
   height: 600px;
 `;
 
-const BookContainer = ({ data, click }) => {
+const BookContainer = ({ data, click, saveBookInfo }) => {
   const [books, setBooks] = useState([]);
   const [carousel, startCarousel] = useState(false);
   const [bookIndex, setBookIndex] = useState(0);
@@ -71,9 +71,16 @@ const BookContainer = ({ data, click }) => {
   };
 
   const saveData = (e) => {
-    //put request to db based on e.targetname 
+    const bookResult = {};
+    bookResult.ibsn = currentBook.volumeInfo.industryIdentifiers[0].identifier;
+    bookResult.title = currentBook.volumeInfo.title;
+    bookResult.author = currentBook.volumeInfo.authors[0];
+    bookResult.published = currentBook.volumeInfo.publishedDate;
+    bookResult.description = currentBook.volumeInfo.description;
+    bookResult.image = currentBook.volumeInfo.imageLinks.thumbnail;
+    bookResult.liked = e.target.parentNode.name;
+    saveBookInfo(bookResult);
     nextBook();
-    console.log('next picture');
   };
 
   return (
@@ -91,10 +98,10 @@ const BookContainer = ({ data, click }) => {
               />
             </Container>
             <ButtonContainer>
-              <SaveButton type="button" name="dislike" onClick={saveData}>
+              <SaveButton type="button" name="false" onClick={saveData}>
                 <Icon className="fas fa-times" />
               </SaveButton>
-              <SaveButton type="button" name="dislike" onClick={saveData}>
+              <SaveButton type="button" name="true" onClick={saveData}>
                 <Icon className="far fa-heart" />
               </SaveButton>
             </ButtonContainer>

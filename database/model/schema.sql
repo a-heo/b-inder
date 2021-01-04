@@ -20,8 +20,12 @@ CREATE TABLE userbooks (
     id SERIAL PRIMARY KEY,
     userid INTEGER NOT NULL,
     isbn VARCHAR,
+    title VARCHAR,
+    author VARCHAR,
+    published VARCHAR,
+    description VARCHAR,
+    image VARCHAR,
     liked BOOLEAN,
-    disliked BOOLEAN,
     readbook BOOLEAN,
     unread BOOLEAN,
         CONSTRAINT user_fk

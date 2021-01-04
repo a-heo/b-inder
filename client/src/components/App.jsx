@@ -43,6 +43,8 @@ const App = () => {
   const [login, enterLogin] = useState(false);
   const [data, setData] = useState([]);
   const [user, changeUser] = useState('');
+  const [userid, updateUserid] = useState(0);
+  const [userpw, updateUserPW] = useState('');
   const [userBooks, changeUserBooks] = useState([]);
 
   const loadSlider = (genre) => {
@@ -63,15 +65,25 @@ const App = () => {
     axios.get(`api/user/${username}/${pw}`)
       .then((response) => {
         changeUserBooks(response.data);
+        updateUserid(response.data[0].id);
       })
       .then(changeUser(username))
+      .then(updateUserPW(pw))
       .then(enterLogin(true))
       .catch((error) => {
         console.log(error, 'userinfo unable to be retrieved');
       });
   };
 
-  console.log(login);
+  const saveBookInfo = (bookData) => {
+    axios.post(`/api/${userid}/books/storeInfo`, bookData)
+      .then(() => {
+        loadUserInfo(user, userpw);
+      })
+      .catch((error) => {
+        console.log(error, 'could not save book');
+      });
+  };
 
   return (
     <div>
@@ -80,7 +92,7 @@ const App = () => {
         <div>
           <Login login={login} enterLogin={enterLogin} loadUserInfo={loadUserInfo}/>
           <Title>b-inder</Title>
-          <Genres data={data} loadSlider={loadSlider} />
+          <Genres data={data} loadSlider={loadSlider} saveBookInfo={saveBookInfo} />
         </div>
       )
         : (
@@ -88,10 +100,9 @@ const App = () => {
             <Login login={login} enterLogin={enterLogin} loadUserInfo={loadUserInfo}/>
             <Title>b-inder</Title>
             <Box>
+              <SignIn login={login} enterLogin={enterLogin} loadUserInfo={loadUserInfo} />
               <NewLogin />
-              <SignIn />
             </Box>
-            <Genres data={data} loadSlider={loadSlider} />
           </div>
         )}
     </div>

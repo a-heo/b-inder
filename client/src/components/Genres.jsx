@@ -15,7 +15,7 @@ const Button = styled.button`
   border-radius: 5px;
 `;
 
-const Genres = ({ loadSlider, data }) => {
+const Genres = ({ loadSlider, data, saveBookInfo }) => {
   const [button, clickButton] = useState(false);
   const [genre, changeGenre] = useState('');
 
@@ -36,7 +36,7 @@ const Genres = ({ loadSlider, data }) => {
 
   return (
     <div>
-      {button ? <BookContainer data={data} click={changeGenres} />
+      {button ? <BookContainer data={data} click={changeGenres} saveBookInfo={saveBookInfo} />
         : (
           <GenreLocation>
             <div>
