@@ -7,7 +7,7 @@ const BookList = ({ userBooks, user, list }) => {
       const newText = text.replace(' ', '-');
       return newText;
     } else {
-        return '';
+      return '';
     }
   };
 

@@ -52,7 +52,7 @@ app.get('/api/books/:genre', (req, res) => {
 app.get('/api/user/:username/:pw', (req, res) => {
   const { username } = req.params;
   const { pw } = req.params;
-  const query = `SELECT * FROM userbooks FULL JOIN users on users.id = userbooks.userid WHERE users.username = '${username}' and users.pw = '${pw}'`;
+  const query = `SELECT * FROM userbooks FULL JOIN users on users.id = userbooks.userid WHERE users.username = '${username}' and users.pw = '${pw}' and userbooks.liked = 't'`;
   db.getInfo(query, (result) => {
     res.send(result);
   });
