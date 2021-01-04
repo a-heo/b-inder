@@ -3,12 +3,11 @@ import styled from 'styled-components';
 
 const BookList = ({ userBooks, user, list }) => {
   const replaceTitle = (text) => {
-    if (userBooks.length > 1) { 
+    if (userBooks.length > 1) {
       const newText = text.replace(' ', '-');
       return newText;
-    } else {
-      return '';
     }
+    return '';
   };
 
   return (

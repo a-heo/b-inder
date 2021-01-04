@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import LoginModal from './LoginModal';
 
 const Box2 = styled.div`
     display: flex;
-    justify-content: right;
-    align-items: right;
+    justify-content: flex-end;
+    align-items: flex-start;
     text-align: right; 
 `;
 
-const Signin = styled.button`
+const LogButton = styled.button`
     justify-content: right;
     align-items: right;
     text-align: right;
@@ -19,43 +18,20 @@ const Signin = styled.button`
     border-radius: 5px;
 `;
 
-const Login = ({ login, enterLogin, loadUserInfo }) => {
-  const [modal, setModal] = useState(false);
-
-  const handleClick = () => {
-    setModal(!modal);
-    if (modal) {
-      enterLogin(false);
-    }
-  };
-
-  return (
+const Login = ({ login, enterLogin, loadUserInfo, modal, setModal }) => (
     <div>
       {login
         ? (
           <Box2>
-            <Signin onClick={handleClick}>Logout</Signin>
+            <LogButton onClick={() => {enterLogin(false)}}>Logout</LogButton>
           </Box2>
         )
         : (
           <Box2>
-            <Signin onClick={handleClick}>Login</Signin>
-            {modal
-              ? (
-                <LoginModal
-                  modal={modal}
-                  setModal={setModal}
-                  changeModal={handleClick}
-                  login={login}
-                  enterLogin={enterLogin}
-                  loadUserInfo={loadUserInfo}
-                />
-              )
-              : null}
+            <LogButton onClick={() => setModal(!modal)} modal={modal} setModal={setModal}>Login</LogButton>
           </Box2>
         )}
     </div>
-  );
-};
+);
 
 export default Login;

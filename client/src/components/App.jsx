@@ -1,20 +1,16 @@
 import React, { useState } from 'react';
+import styled, { createGlobalStyle } from 'styled-components';
 
-import { createGlobalStyle } from 'styled-components';
-import styled from 'styled-components';
-import Login from './Login';
-import NewLogin from './NewLogin';
-import SignIn from './SignIn';
+import UpperHeader from './UpperHeader';
 import Genres from './Genres';
-import CheckList from './CheckList';
+import LoginModal from './LoginModal';
+import SignInContainer from './SignInContainer';
 
 const axios = require('axios');
 
 const GlobalStyle = createGlobalStyle`
   body {
     background-color: #FCF8E8;
-    display: flex;
-    flex-direction: column;
     font-family: 'bungee';
     color: #433D3C;
   }
@@ -30,18 +26,10 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const UpperHeader = styled.div`
-  flex-direction: row;
-`;
-
 const Title = styled.h1`
     font-size: 125px; 
     text-align: center;
     color: #f18c8e;
-`;
-
-const Box = styled.div`
-    justify-content: center;
 `;
 
 const App = () => {
@@ -51,13 +39,16 @@ const App = () => {
   const [userid, updateUserid] = useState(0);
   const [userpw, updateUserPW] = useState('');
   const [userBooks, changeUserBooks] = useState([]);
+  const [modal, setModal] = useState(false);
 
   const loadSlider = (genre) => {
     axios.get(`api/books/${genre}`)
       .then((response) => {
         // filter data with only those that have volumeinfo
-        const books = response.data.filter((book) =>
-          book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail);
+        const books = response.data.filter(
+          (book) => book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail,
+        );
+
         setData(books);
       })
       .catch((error) => {
@@ -89,27 +80,59 @@ const App = () => {
       });
   };
 
+  const handleClick = () => {
+    setModal(!modal);
+  };
+
   return (
     <div>
       <GlobalStyle />
+      {modal
+        ? (
+          <LoginModal
+            modal={modal}
+            setModal={setModal}
+            changeModal={handleClick}
+            login={login}
+            enterLogin={enterLogin}
+            loadUserInfo={loadUserInfo}
+          />
+        )
+        : null}
       {login ? (
         <div>
-          <UpperHeader>
-            <Login login={login} enterLogin={enterLogin} loadUserInfo={loadUserInfo}/>
-            <CheckList userBooks={userBooks} user={user} />
-          </UpperHeader>
+          <UpperHeader
+            userBooks={userBooks}
+            user={user}
+            login={login}
+            enterLogin={enterLogin}
+            loadUserInfo={loadUserInfo}
+            modal={modal}
+            setModal={setModal}
+          />
           <Title>b-inder</Title>
           <Genres data={data} loadSlider={loadSlider} saveBookInfo={saveBookInfo} />
         </div>
       )
         : (
           <div>
-            <Login login={login} enterLogin={enterLogin} loadUserInfo={loadUserInfo}/>
+            <UpperHeader
+              userBooks={userBooks}
+              user={user}
+              login={login}
+              enterLogin={enterLogin}
+              loadUserInfo={loadUserInfo}
+              modal={modal}
+              setModal={setModal}
+            />
             <Title>b-inder</Title>
-            <Box>
-              <SignIn login={login} enterLogin={enterLogin} loadUserInfo={loadUserInfo} />
-              <NewLogin />
-            </Box>
+            <SignInContainer
+              login={login}
+              enterLogin={enterLogin}
+              loadUserInfo={loadUserInfo}
+              modal={modal}
+              setModal={setModal}
+            />
           </div>
         )}
     </div>

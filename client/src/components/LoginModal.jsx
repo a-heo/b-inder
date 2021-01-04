@@ -18,8 +18,9 @@ const LoginModal = ({
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e) => { 
     loadUserInfo(userInfo, pwInfo);
+    changeModal();
     e.preventDefault();
   };
 

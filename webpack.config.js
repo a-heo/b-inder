@@ -18,6 +18,8 @@ module.exports = {
           options: {
             presets: [
               ['@babel/preset-env', {
+                useBuiltIns: 'entry',
+              }, {
                 targets: 'defaults',
               }],
               '@babel/preset-react',
