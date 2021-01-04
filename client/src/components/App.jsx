@@ -6,6 +6,7 @@ import Login from './Login';
 import NewLogin from './NewLogin';
 import SignIn from './SignIn';
 import Genres from './Genres';
+import CheckList from './CheckList';
 
 const axios = require('axios');
 
@@ -27,6 +28,10 @@ const GlobalStyle = createGlobalStyle`
     border: 2px #70af85; 
     border-radius: 5px;
   }
+`;
+
+const UpperHeader = styled.div`
+  flex-direction: row;
 `;
 
 const Title = styled.h1`
@@ -51,9 +56,8 @@ const App = () => {
     axios.get(`api/books/${genre}`)
       .then((response) => {
         // filter data with only those that have volumeinfo
-        const books =
-          response.data.filter((book) =>
-            book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail);
+        const books = response.data.filter((book) =>
+          book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail);
         setData(books);
       })
       .catch((error) => {
@@ -90,7 +94,10 @@ const App = () => {
       <GlobalStyle />
       {login ? (
         <div>
-          <Login login={login} enterLogin={enterLogin} loadUserInfo={loadUserInfo}/>
+          <UpperHeader>
+            <Login login={login} enterLogin={enterLogin} loadUserInfo={loadUserInfo}/>
+            <CheckList userBooks={userBooks} user={user} />
+          </UpperHeader>
           <Title>b-inder</Title>
           <Genres data={data} loadSlider={loadSlider} saveBookInfo={saveBookInfo} />
         </div>
