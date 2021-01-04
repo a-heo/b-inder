@@ -59,34 +59,33 @@ const App = () => {
       });
   };
 
-  const loadUserInfo = (info) => {
-    axios.get(`api/books/`)
-  }
-
-  const gatherUserInfo = (username) => {
-    axios.get(`api/user/${username}`)
+  const loadUserInfo = (username, pw) => {
+    axios.get(`api/user/${username}/${pw}`)
       .then((response) => {
         changeUserBooks(response.data);
-        changeUser(username);
       })
+      .then(changeUser(username))
+      .then(enterLogin(true))
       .catch((error) => {
         console.log(error, 'userinfo unable to be retrieved');
       });
   };
+
+  console.log(login);
 
   return (
     <div>
       <GlobalStyle />
       {login ? (
         <div>
-          <Login login={login} enterLogin={enterLogin} />
+          <Login login={login} enterLogin={enterLogin} loadUserInfo={loadUserInfo}/>
           <Title>b-inder</Title>
           <Genres data={data} loadSlider={loadSlider} />
         </div>
       )
         : (
           <div>
-            <Login login={login} enterLogin={enterLogin} />
+            <Login login={login} enterLogin={enterLogin} loadUserInfo={loadUserInfo}/>
             <Title>b-inder</Title>
             <Box>
               <NewLogin />

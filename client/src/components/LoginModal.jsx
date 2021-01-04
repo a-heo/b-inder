@@ -4,23 +4,23 @@ import {
 } from './Modal';
 
 const LoginModal = ({
-  modal, changeModal, login, enterLogin,
+  modal, changeModal, login, enterLogin, loadUserInfo
 }) => {
   const [userInfo, saveUserInfo] = useState('');
   const [pwInfo, savePWInfo] = useState('');
 
   const handleChange = (e) => {
     if (e.target.name === 'username') {
-      saveUserInfo({ [e.target.name]: e.target.value });
+      saveUserInfo(e.target.value);
     }
     if (e.target.name === 'pw') {
-      savePWInfo({ [e.target.name]: e.target.value });
+      savePWInfo(e.target.value);
     }
-    console.log(userInfo, pwInfo);
   };
 
   const handleSubmit = (e) => {
-
+    loadUserInfo(userInfo, pwInfo);
+    e.preventDefault();
   };
 
   return (

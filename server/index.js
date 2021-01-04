@@ -1,12 +1,17 @@
 const express = require('express');
 const axios = require('axios');
+const path = require('path');
 const db = require('../database/controller/index.js');
 const API_KEY = require('./config/api.js');
 
 const app = express();
 const port = 3001;
 
-app.use(express.static('client/dist'));
+const PUBLIC_DIR = path.resolve(__dirname, '..', 'client/dist');
+
+// app.use(express.static('client/dist'));
+
+app.use('/', express.static(PUBLIC_DIR));
 
 // get book info
 app.get('/api/books/:genre', (req, res) => {
@@ -61,7 +66,7 @@ app.post('/api/:username/:pw', (req, res) => {
 
 // put book info for specific user
 app.post('api/user/:info', (req, res) => {
-  
+
 });
 
 app.listen(port, () => {

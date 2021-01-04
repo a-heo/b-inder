@@ -4,11 +4,11 @@ const getInfo = (query, callback) => {
   pool
     .query(query)
     .then((res) => {
-        console.log(res.rows);
       callback(res.rows);
     })
     .catch((e) => {
       console.log(e);
+      res.sendStatus(500);
     });
 };
 

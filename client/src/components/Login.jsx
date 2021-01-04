@@ -19,7 +19,7 @@ const Signin = styled.button`
     border-radius: 5px;
 `;
 
-const Login = ({ login, enterLogin }) => {
+const Login = ({ login, enterLogin, loadUserInfo }) => {
   const [modal, setModal] = useState(false);
 
   const handleClick = () => {
@@ -45,6 +45,7 @@ const Login = ({ login, enterLogin }) => {
                   changeModal={handleClick}
                   login={login}
                   enterLogin={enterLogin}
+                  loadUserInfo={loadUserInfo}
                 />
               )
               : null}
