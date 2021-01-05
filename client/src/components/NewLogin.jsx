@@ -1,15 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import LoginModal from './LoginModal';
 
 const Button = styled.button`
+    margin: 2vw;
     justify-content: center; 
     align-items: center;
+    font-size: 3vw;
 `;
 
-const NewLogin = () => (
+const NewLogin = ({ signupModal, setSignupModal }) => (
   <div>
-    <Button>Sign Up</Button>
+    <Button type="button" onClick={() => { setSignupModal(!signupModal); }}>Sign Up</Button>
   </div>
 );
 

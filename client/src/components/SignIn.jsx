@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Button = styled.button`
+    margin: 2vw;
     justify-content: space-between; 
     background-color: #83A95C;
     border: 2px; 
     border-radius: 5px;
     font-family: 'bungee';
-    font-size: 24px; 
+    font-size: 3vw;
     cursor:pointer; 
     width: auto;
 `;

@@ -9,6 +9,7 @@ const Header = styled.div`
   flex-direction: row;
   justify-content: flex-end;
   background-color: #83a95c;
+  margin: 1vw;
 `;
 
 const UpperHeader = ({

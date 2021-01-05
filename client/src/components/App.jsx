@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 
 import LoginModal from './LoginModal';
+import SignUpModal from './SignUpModal';
 import UpperHeader from './UpperHeader';
 import SignInContainer from './SignInContainer';
 import CenterContainer from './CenterContainer';
@@ -16,18 +17,21 @@ const GlobalStyle = createGlobalStyle`
   }
   button {
     font-family: 'bungee';
-    font-size: 25px;
+    font-size: 2vw;
     width: auto; 
     cursor:pointer; 
     background-color: #83A95C;
-    font-size: 24px; 
-    border: 2px #70af85; 
+    border: 2px; 
     border-radius: 5px;
+    &:hover {
+      font-weight: 900;
+      background-color: #ff6c60;
+    }
   }
 `;
 
 const Title = styled.h1`
-    font-size: 125px; 
+    font-size: 10vw; 
     text-align: center;
     color: #f18c8e;
 `;
@@ -41,6 +45,7 @@ const App = () => {
   const [userBooks, changeUserBooks] = useState([]);
   const [modal, setModal] = useState(false);
   const [list, setList] = useState(false);
+  const [signupModal, setSignupModal] = useState(false);
 
   const loadSlider = (genre) => {
     axios.get(`api/books/${genre}`)
@@ -100,6 +105,14 @@ const App = () => {
           />
         )
         : null}
+      {signupModal
+        ? (
+          <SignUpModal
+            signupModal={signupModal}
+            setSignupModal={setSignupModal}
+          />
+        )
+        : null}
       {login ? (
         <div>
           <UpperHeader
@@ -139,6 +152,8 @@ const App = () => {
               loadUserInfo={loadUserInfo}
               modal={modal}
               setModal={setModal}
+              signupModal={signupModal}
+              setSignupModal={setSignupModal}
             />
           </div>
         )}

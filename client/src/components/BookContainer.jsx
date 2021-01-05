@@ -22,7 +22,7 @@ const ButtonContainer = styled.div`
   padding: 25px;
 `;
 
-const SaveButton = styled.button`
+const SaveButton = styled.span`
   justify-content: center;
   align-contents: center;
   background-color: transparent;
@@ -31,9 +31,16 @@ const SaveButton = styled.button`
 
 const Icon = styled.i`  
   justify-content: center;
-  font-size: 200%;
+  font-size: 10vw;
+  margin: 2vw;
   background-color: transparent;
-  color: red; 
+  color: #ff9b93; 
+  cursor:pointer; 
+  &:hover {
+    font-weight: 900;
+    outline: none; 
+    color: #ff6c60;
+  }
 `;
 
 const Image = styled.img`
@@ -98,10 +105,10 @@ const BookContainer = ({ data, click, saveBookInfo }) => {
               />
             </Container>
             <ButtonContainer>
-              <SaveButton type="button" name="false" onClick={saveData}>
+              <SaveButton name="false" onClick={saveData}>
                 <Icon className="fas fa-times" />
               </SaveButton>
-              <SaveButton type="button" name="true" onClick={saveData}>
+              <SaveButton name="true" onClick={saveData}>
                 <Icon className="far fa-heart" />
               </SaveButton>
             </ButtonContainer>

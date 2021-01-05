@@ -3,8 +3,8 @@ import {
   ModalContainer, Background, ExitButton, ButtonBox, FormLabel, Form, Input, Submit,
 } from './Modal';
 
-const LoginModal = ({
-  modal, changeModal, login, enterLogin, loadUserInfo
+const SignUpModal = ({
+  signupModal, setSignupModal
 }) => {
   const [userInfo, saveUserInfo] = useState('');
   const [pwInfo, savePWInfo] = useState('');
@@ -18,20 +18,21 @@ const LoginModal = ({
     }
   };
 
-  const handleSubmit = (e) => { 
-    loadUserInfo(userInfo, pwInfo);
-    changeModal();
+  const handleSubmit = (e) => {
+    // saveUserInfo(userInfo, pwInfo);
+    // changeModal();
+    console.log('click');
     e.preventDefault();
   };
 
   return (
     <Background>
-      {modal ? (
+      {signupModal ? (
         <ModalContainer>
           <ButtonBox>
-            <ExitButton type="button" onClick={() => changeModal()}>X</ExitButton>
+            <ExitButton type="button" onClick={() => { setSignupModal(!signupModal); }}>X</ExitButton>
           </ButtonBox>
-          <p>Login</p>
+          <p>Make an Account</p>
           <Form onSubmit={handleSubmit}>
             <FormLabel>
               Username:
@@ -42,7 +43,7 @@ const LoginModal = ({
               <Input type="text" name="pw" onChange={handleChange} />
             </FormLabel>
             <FormLabel>
-              <Submit type="submit" value="submit" />
+              <Submit type="submit" value="Sign Up" />
             </FormLabel>
           </Form>
         </ModalContainer>
@@ -52,4 +53,4 @@ const LoginModal = ({
   );
 };
 
-export default LoginModal;
+export default SignUpModal;

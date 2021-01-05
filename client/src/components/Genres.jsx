@@ -4,14 +4,21 @@ import styled from 'styled-components';
 import BookContainer from './BookContainer';
 
 const GenreLocation = styled.div`
-  justify-content: space-around;
-  text-align: center;
+  display: flex; 
+  flex-direction: column;
+`;
+
+const GenreRow = styled.div`
+  display: flex;
+  justify-content: center;
 `;
 
 const Button = styled.button`
+  margin: 10px;
   background-color: #70af85;
   color: #FCF8E8;
   border: 2px #70af85; 
+  font-size: 36px;
   border-radius: 5px;
 `;
 
@@ -39,7 +46,7 @@ const Genres = ({ loadSlider, data, saveBookInfo }) => {
       {button ? <BookContainer data={data} click={changeGenres} saveBookInfo={saveBookInfo} />
         : (
           <GenreLocation>
-            <div>
+            <GenreRow>
               <Button
                 type="button"
                 name="fiction"
@@ -61,8 +68,8 @@ const Genres = ({ loadSlider, data, saveBookInfo }) => {
               >
                 Young Adult
               </Button>
-            </div>
-            <div>
+            </GenreRow>
+            <GenreRow>
               <Button
                 type="button"
                 name="graphic"
@@ -84,7 +91,7 @@ const Genres = ({ loadSlider, data, saveBookInfo }) => {
               >
                 Fantasy
               </Button>
-            </div>
+            </GenreRow>
           </GenreLocation>
         )}
     </div>

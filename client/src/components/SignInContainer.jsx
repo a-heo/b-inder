@@ -11,7 +11,7 @@ const Box = styled.div`
 `;
 
 const SignInContainer = ({
-  login, enterLogin, loadUserInfo, modal, setModal,
+  login, enterLogin, loadUserInfo, modal, setModal, signupModal, setSignupModal
 }) => (
   <Box>
     <SignIn
@@ -21,7 +21,13 @@ const SignInContainer = ({
       modal={modal}
       setModal={setModal}
     />
-    <NewLogin />
+    <NewLogin 
+      login={login}
+      enterLogin={enterLogin}
+      loadUserInfo={loadUserInfo}
+      signupModal={signupModal}
+      setSignupModal={setSignupModal}
+    />
   </Box>
 );
 
