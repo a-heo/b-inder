@@ -52,7 +52,7 @@ app.get('/api/books/:genre', (req, res) => {
 app.get('/api/:user/:pw/id', (req, res) => {
   const { user } = req.params;
   const { pw } = req.params;
-  const query = `SELECT id FROM USERS WHERE users.username = '${user}' and users.pw = '${pw}'`;
+  const query = `SELECT id FROM USERS WHERE users.username = '${user}' and users.pw = '${pw}' `;
   db.getInfo(query, (result) => {
     res.send(result);
   });
@@ -78,7 +78,7 @@ app.post('/api/user/new', (req, res) => {
 // put book info for specific user
 app.post('/api/:id/books/storeInfo', (req, res) => {
   const { id } = req.params;
-  const query = 'INSERT INTO userbooks (userid, isbn, title, author, published, description, image, liked) values ($1, $2, $3, $4, $5, $6, $7, $8)';
+  const query = 'INSERT INTO userbooks (userid, isbn, title, author, published, description, image, liked) values ($1, $2, $3, $4, $5, $6, $7, $8) on conflict (userid, isbn) do update set liked = EXCLUDED.liked';
   const values = [
     id,
     req.body.ibsn,
