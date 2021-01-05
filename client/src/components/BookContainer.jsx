@@ -77,7 +77,7 @@ const BookContainer = ({ data, click, saveBookInfo }) => {
     setBookIndex(index);
   };
 
-  const saveData = (e) => {
+  const saveDisliked = (e) => {
     const bookResult = {};
     bookResult.ibsn = currentBook.volumeInfo.industryIdentifiers[0].identifier;
     bookResult.title = currentBook.volumeInfo.title;
@@ -85,7 +85,20 @@ const BookContainer = ({ data, click, saveBookInfo }) => {
     bookResult.published = currentBook.volumeInfo.publishedDate;
     bookResult.description = currentBook.volumeInfo.description;
     bookResult.image = currentBook.volumeInfo.imageLinks.thumbnail;
-    bookResult.liked = e.target.parentNode.name;
+    bookResult.liked = false;
+    saveBookInfo(bookResult);
+    nextBook();
+  };
+
+  const saveLiked = (e) => {
+    const bookResult = {};
+    bookResult.ibsn = currentBook.volumeInfo.industryIdentifiers[0].identifier;
+    bookResult.title = currentBook.volumeInfo.title;
+    bookResult.author = currentBook.volumeInfo.authors[0];
+    bookResult.published = currentBook.volumeInfo.publishedDate;
+    bookResult.description = currentBook.volumeInfo.description;
+    bookResult.image = currentBook.volumeInfo.imageLinks.thumbnail;
+    bookResult.liked = true;
     saveBookInfo(bookResult);
     nextBook();
   };
@@ -105,10 +118,10 @@ const BookContainer = ({ data, click, saveBookInfo }) => {
               />
             </Container>
             <ButtonContainer>
-              <SaveButton name="false" onClick={saveData}>
+              <SaveButton name="false" onClick={saveDisliked}>
                 <Icon className="fas fa-times" />
               </SaveButton>
-              <SaveButton name="true" onClick={saveData}>
+              <SaveButton name="true" onClick={saveLiked}>
                 <Icon className="far fa-heart" />
               </SaveButton>
             </ButtonContainer>

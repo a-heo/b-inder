@@ -46,6 +46,7 @@ const App = () => {
   const [modal, setModal] = useState(false);
   const [list, setList] = useState(false);
   const [signupModal, setSignupModal] = useState(false);
+  const [failMsg, setFailMsg] = useState(false);
 
   const loadSlider = (genre) => {
     axios.get(`api/books/${genre}`)
@@ -62,27 +63,53 @@ const App = () => {
       });
   };
 
-  const loadUserInfo = (username, pw) => {
-    axios.get(`api/user/${username}/${pw}`)
+  const loadUserBooks = (userData) => {
+    axios.get(`api/${userData.user}/${userData.pw}/info`)
       .then((response) => {
         changeUserBooks(response.data);
+      })
+      .catch((error) => {
+        console.log(error, 'userbooks unable to be retrieved');
+        setFailMsg(!failMsg);
+      });
+  };
+
+  const loadUserInfo = (userData) => {
+    axios.get(`api/${userData.user}/${userData.pw}/id`)
+      .then((response) => {
         updateUserid(response.data[0].id);
       })
-      .then(changeUser(username))
-      .then(updateUserPW(pw))
+      .then(changeUser(userData.user))
+      .then(updateUserPW(userData.pw))
       .then(enterLogin(true))
+      .then(loadUserBooks(userData))
       .catch((error) => {
         console.log(error, 'userinfo unable to be retrieved');
+        setFailMsg(!failMsg);
       });
   };
 
   const saveBookInfo = (bookData) => {
     axios.post(`/api/${userid}/books/storeInfo`, bookData)
       .then(() => {
-        loadUserInfo(user, userpw);
+        const userData = {};
+        userData.user = user;
+        userData.pw = userpw;
+        loadUserBooks(userData);
       })
       .catch((error) => {
         console.log(error, 'could not save book');
+      });
+  };
+
+  console.log(userBooks);
+  const saveNewUser = (newInfo) => {
+    axios.post('/api/user/new', newInfo)
+      .then(() => {
+        loadUserInfo(newInfo);
+      })
+      .catch((error) => {
+        console.log(error, 'user exists or could not be saved');
       });
   };
 
@@ -110,6 +137,9 @@ const App = () => {
           <SignUpModal
             signupModal={signupModal}
             setSignupModal={setSignupModal}
+            saveNewUser={saveNewUser}
+            failMsg={failMsg}
+            setFailMsg={setFailMsg}
           />
         )
         : null}

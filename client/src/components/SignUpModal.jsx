@@ -4,7 +4,7 @@ import {
 } from './Modal';
 
 const SignUpModal = ({
-  signupModal, setSignupModal
+  signupModal, setSignupModal, saveNewUser, failMsg, setFailMsg
 }) => {
   const [userInfo, saveUserInfo] = useState('');
   const [pwInfo, savePWInfo] = useState('');
@@ -19,9 +19,11 @@ const SignUpModal = ({
   };
 
   const handleSubmit = (e) => {
-    // saveUserInfo(userInfo, pwInfo);
-    // changeModal();
-    console.log('click');
+    const newUser = {};
+    newUser.user = userInfo;
+    newUser.pw = pwInfo;
+    saveNewUser(newUser);
+    setSignupModal(!signupModal);
     e.preventDefault();
   };
 
@@ -40,10 +42,14 @@ const SignUpModal = ({
             </FormLabel>
             <FormLabel>
               Password:
-              <Input type="text" name="pw" onChange={handleChange} />
+              <Input type="password" name="pw" onChange={handleChange} />
             </FormLabel>
             <FormLabel>
               <Submit type="submit" value="Sign Up" />
+            </FormLabel>
+            <FormLabel>
+              {failMsg ? <p>Username already exists</p>
+              : null}
             </FormLabel>
           </Form>
         </ModalContainer>

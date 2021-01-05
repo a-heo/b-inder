@@ -8,14 +8,13 @@ const getInfo = (query, callback) => {
     })
     .catch((e) => {
       console.log(e);
-      res.sendStatus(500);
     });
 };
 
 const addInfo = (query, values, res) => {
   pool
     .query(query, values)
-    .then((result) => {
+    .then(() => {
       res.sendStatus(200);
     })
     .catch((e) => {

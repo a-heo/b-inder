@@ -18,11 +18,15 @@ const LoginModal = ({
     }
   };
 
-  const handleSubmit = (e) => { 
-    loadUserInfo(userInfo, pwInfo);
+  const handleSubmit = (e) => {
+    const userData = {};
+    userData.user = userInfo;
+    userData.pw = pwInfo;
+    loadUserInfo(userData);
     changeModal();
     e.preventDefault();
   };
+
 
   return (
     <Background>
@@ -39,7 +43,7 @@ const LoginModal = ({
             </FormLabel>
             <FormLabel>
               Password:
-              <Input type="text" name="pw" onChange={handleChange} />
+              <Input type="password" name="pw" onChange={handleChange} />
             </FormLabel>
             <FormLabel>
               <Submit type="submit" value="submit" />

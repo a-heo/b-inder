@@ -48,22 +48,30 @@ app.get('/api/books/:genre', (req, res) => {
     });
 });
 
-// get book info for specific user
-app.get('/api/user/:username/:pw', (req, res) => {
-  const { username } = req.params;
+// get user id
+app.get('/api/:user/:pw/id', (req, res) => {
+  const { user } = req.params;
   const { pw } = req.params;
-  const query = `SELECT * FROM userbooks FULL JOIN users on users.id = userbooks.userid WHERE users.username = '${username}' and users.pw = '${pw}' and userbooks.liked = 't'`;
+  const query = `SELECT id FROM USERS WHERE users.username = '${user}' and users.pw = '${pw}'`;
+  db.getInfo(query, (result) => {
+    res.send(result);
+  });
+});
+
+// get book info for specific user
+app.get('/api/:user/:pw/info', (req, res) => {
+  const { user } = req.params;
+  const { pw } = req.params;
+  const query = `SELECT * FROM userbooks FULL JOIN users on users.id = userbooks.userid WHERE users.username = '${user}' and users.pw = '${pw}' and userbooks.liked = 't'`;
   db.getInfo(query, (result) => {
     res.send(result);
   });
 });
 
 // make new user info
-app.post('/api/:username/:pw', (req, res) => {
-  const { username } = req.params;
-  const { pw } = req.params;
+app.post('/api/user/new', (req, res) => {
   const query = 'INSERT INTO users (username, pw) values ($1, $2)';
-  const values = [username, pw];
+  const values = [req.body.user, req.body.pw];
   db.addInfo(query, values, res);
 });
 
