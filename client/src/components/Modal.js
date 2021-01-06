@@ -1,4 +1,17 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+function animatetop() {
+  return keyframes`
+  from {
+    transform:translateY(50%); 
+    opacity:0;
+    }
+  to {
+    transform:translateY(0); 
+    opacity:1;
+    }
+`;
+}
 
 const Background = styled.div`
   width: 100%;
@@ -22,23 +35,25 @@ const ModalContainer = styled.div`
   box-shadow: rgba(0,0,0,0.28) 0px 8px 28px;
   padding: 15px 15px 15px 15px;
   font-size: 3vw;
-  -webkit-animation-name: animatetop;
-    -webkit-animation-duration: 0.4s;
+  ${'' /* -webkit-animation-name: ${animatetop};
+    -webkit-animation-duration: 0.4s; */}
     animation-name: animatetop;
-    animation-duration: 0.4s
+    animation-duration: 0.8s
 `;
 
 // @-webkit-keyframes animatetop {
 //     from {top:-300px; opacity:0}
 //     to {top:0; opacity:1}
 // }
-// @keyframes animatetop {
-//     from {top:-300px; opacity:0}
-//     to {top:0; opacity:1}
-// }
+
+const Text = styled.text`
+  text-align: center;
+  font-size: 2vw;
+`;
+
 const ButtonBox = styled.div`
     display: flex;
-    ${'' /* flex-direction: row-reverse; */}
+    padding: 15px;
     justify-content: flex-end;
 `;
 
@@ -47,15 +62,18 @@ const ExitButton = styled.button`
   font-size: 3vw;
   cursor: pointer;
 `;
+
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin: 1vw;
 `;
+
 const FormLabel = styled.label`
   display: flex;
   flex-direction: row;
+  justify-content: center;
   margin: 1vw;
   font-size: 2vw;
 `;
@@ -82,4 +100,4 @@ const Submit = styled.input`
     }
 `;
 
-export { ModalContainer, Background, ExitButton, ButtonBox, FormLabel, Form, Input, Submit };
+export { ModalContainer, Text, Background, ExitButton, ButtonBox, FormLabel, Form, Input, Submit };

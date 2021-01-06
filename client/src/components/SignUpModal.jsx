@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  ModalContainer, Background, ExitButton, ButtonBox, FormLabel, Form, Input, Submit,
+  ModalContainer, Text, Background, ExitButton, ButtonBox, FormLabel, Form, Input, Submit,
 } from './Modal';
 
 const SignUpModal = ({
@@ -22,8 +22,14 @@ const SignUpModal = ({
     const newUser = {};
     newUser.user = userInfo;
     newUser.pw = pwInfo;
-    saveNewUser(newUser);
-    setSignupModal(!signupModal);
+//error message does not load. fix later
+    saveNewUser(newUser)
+      .then(() => {
+        if (!failMsg) {
+          setSignupModal(!signupModal);
+        }
+      });
+
     e.preventDefault();
   };
 
@@ -34,7 +40,7 @@ const SignUpModal = ({
           <ButtonBox>
             <ExitButton type="button" onClick={() => { setSignupModal(!signupModal); }}>X</ExitButton>
           </ButtonBox>
-          <p>Make an Account</p>
+          <Text>Make an Account</Text>
           <Form onSubmit={handleSubmit}>
             <FormLabel>
               Username:
@@ -49,7 +55,7 @@ const SignUpModal = ({
             </FormLabel>
             <FormLabel>
               {failMsg ? <p>Username already exists</p>
-              : null}
+                : null}
             </FormLabel>
           </Form>
         </ModalContainer>

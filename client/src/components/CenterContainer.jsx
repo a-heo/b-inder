@@ -1,13 +1,24 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import BookList from './BookList';
 import Genres from './Genres';
 
+function blinkingEffect() {
+  return keyframes`
+    50% {
+      color: #ffd66b;
+    }
+  `;
+}
+
 const Title = styled.h1`
-    font-size: 125px; 
+    font-size: 6vw; 
     text-align: center;
     color: #f18c8e;
+    margin-bottom: 5vw;
+    animation: ${blinkingEffect} 7s linear infinite;
+
 `;
 
 const CenterContainer = ({

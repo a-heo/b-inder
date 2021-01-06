@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  ModalContainer, Background, ExitButton, ButtonBox, FormLabel, Form, Input, Submit,
+  ModalContainer, Background, Text, ExitButton, ButtonBox, FormLabel, Form, Input, Submit,
 } from './Modal';
 
 const LoginModal = ({
@@ -35,7 +35,8 @@ const LoginModal = ({
           <ButtonBox>
             <ExitButton type="button" onClick={() => changeModal()}>X</ExitButton>
           </ButtonBox>
-          <p>Login</p>
+          <Text>Welcome Back!</Text>
+          <Text>Login</Text>
           <Form onSubmit={handleSubmit}>
             <FormLabel>
               Username:
