@@ -31,8 +31,9 @@ const SaveButton = styled.span`
 
 const Icon = styled.i`  
   justify-content: center;
-  font-size: 10vw;
-  margin: 2vw;
+  font-size: 8vw;
+  margin-left: 2vw;
+  margin-right: 2vw;
   background-color: transparent;
   color: #ff9b93; 
   cursor:pointer; 

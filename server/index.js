@@ -37,6 +37,9 @@ app.get('/api/books/:genre', (req, res) => {
   if (req.params.genre === 'youngadult') {
     genreUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:"young+adult+fiction"&orderBy=newest&printType=books&langRestrict=en&maxResults=40&key=${API_KEY}`;
   }
+  if (req.params.genre === 'asian') {
+    genreUrl = `https://www.googleapis.com/books/v1/volumes?q=subject:"asian+americans+fiction"&orderBy=newest&printType=books&langRestrict=en&maxResults=40&key=${API_KEY}`;
+  }
 
   axios.get(genreUrl)
     .then((data) => {

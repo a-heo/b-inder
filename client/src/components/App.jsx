@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle, keyframes } from 'styled-components';
 
 import LoginModal from './LoginModal';
 import SignUpModal from './SignUpModal';
@@ -26,14 +26,32 @@ const GlobalStyle = createGlobalStyle`
     &:hover {
       font-weight: 900;
       background-color: #ff6c60;
+      box-shadow: 5px 5px 3px rgba(black, 0.25);
     }
   }
 `;
+
+function blinkingEffect() {
+  return keyframes`
+    50% {
+      color: #ffd66b;
+      box-shadow: 3px 3px 2px rgba(black, 0.15);
+    }
+  `;
+}
 
 const Title = styled.h1`
     font-size: 10vw; 
     text-align: center;
     color: #f18c8e;
+    margin-bottom: 20px;
+    animation: ${blinkingEffect} 7s linear infinite;
+
+`;
+
+const SubTitle = styled.h3`
+    font-size: 2vw; 
+    text-align: center;
 `;
 
 const App = () => {
@@ -70,7 +88,6 @@ const App = () => {
       })
       .catch((error) => {
         console.log(error, 'userbooks unable to be retrieved');
-        setFailMsg(!failMsg);
       });
   };
 
@@ -85,7 +102,6 @@ const App = () => {
       .then(loadUserBooks(userData))
       .catch((error) => {
         console.log(error, 'userinfo unable to be retrieved');
-        setFailMsg(!failMsg);
       });
   };
 
@@ -102,13 +118,13 @@ const App = () => {
       });
   };
 
-  console.log(userBooks);
   const saveNewUser = (newInfo) => {
-    axios.post('/api/user/new', newInfo)
+    return axios.post('/api/user/new', newInfo)
       .then(() => {
         loadUserInfo(newInfo);
       })
       .catch((error) => {
+        setFailMsg(true);
         console.log(error, 'user exists or could not be saved');
       });
   };
@@ -176,6 +192,7 @@ const App = () => {
               setModal={setModal}
             />
             <Title>b-inder</Title>
+            <SubTitle>a quick book search for those with little time</SubTitle>
             <SignInContainer
               login={login}
               enterLogin={enterLogin}
