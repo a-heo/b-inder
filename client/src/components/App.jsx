@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
+import axios from 'axios';
 
 import LoginModal from './LoginModal';
 import SignUpModal from './SignUpModal';
-import UpperHeader from './UpperHeader';
+import UpperHeader from './Header/UpperHeader';
 import SignInContainer from './SignInContainer';
-import CenterContainer from './CenterContainer';
-
-const axios = require('axios');
+import CenterContainer from './BookSection/CenterContainer';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -66,20 +65,20 @@ const App = () => {
   const [signupModal, setSignupModal] = useState(false);
   const [failMsg, setFailMsg] = useState(false);
 
-  const loadSlider = (genre) => {
-    axios.get(`api/books/${genre}`)
-      .then((response) => {
-        // filter data with only those that have volumeinfo
-        const books = response.data.filter(
-          (book) => book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail,
-        );
+  // const loadSlider = (genre) => {
+  //   axios.get(`api/books/${genre}`)
+  //     .then((response) => {
+  //       // filter data with only those that have volumeinfo
+  //       const books = response.data.filter(
+  //         (book) => book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail,
+  //       );
 
-        setData(books);
-      })
-      .catch((error) => {
-        console.log(error, 'loadslider unable to be retrieve');
-      });
-  };
+  //       setData(books);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error, 'loadslider unable to be retrieve');
+  //     });
+  // };
 
   const loadUserBooks = (userData) => {
     axios.get(`api/${userData.user}/${userData.pw}/info`)
@@ -172,7 +171,7 @@ const App = () => {
           />
           <CenterContainer
             data={data}
-            loadSlider={loadSlider}
+            // loadSlider={loadSlider}
             saveBookInfo={saveBookInfo}
             userBooks={userBooks}
             user={user}

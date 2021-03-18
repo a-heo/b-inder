@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
-import BookList from './BookList';
+import BookList from '../Header/BookList';
 import Genres from './Genres';
 
 function blinkingEffect() {
@@ -30,7 +30,7 @@ const CenterContainer = ({
     ) : (
       <div>
         <Title>b-inder</Title>
-        <Genres data={data} loadSlider={loadSlider} saveBookInfo={saveBookInfo} />
+        <Genres /*data={data} loadSlider={loadSlider}*/ saveBookInfo={saveBookInfo} />
       </div>
     )}
   </div>

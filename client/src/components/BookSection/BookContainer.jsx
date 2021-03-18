@@ -10,8 +10,8 @@ const WholeContainer = styled.div`
 `;
 
 const Container = styled.div`
-  width: 400px;
-  height: 600px;
+  ${'' /* width: 50%;
+  height: 60%; */}
   display: center;
   margin: auto; 
   justify-content: center;
@@ -45,8 +45,8 @@ const Icon = styled.i`
 `;
 
 const Image = styled.img`
-  width: 400px;
-  height: 600px;
+  width: 15vw;
+  height: 25vw;
 `;
 
 const BookContainer = ({ data, click, saveBookInfo }) => {
@@ -67,8 +67,11 @@ const BookContainer = ({ data, click, saveBookInfo }) => {
   }, [data]);
 
   const handleClick = () => {
+    setBooks([]);
     click();
   };
+
+  console.log(books[bookIndex], 'inside bookcontainer');
 
   const currentBook = books[bookIndex];
 

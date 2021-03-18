@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 import BookContainer from './BookContainer';
 
@@ -30,13 +31,27 @@ const Button = styled.button`
   margin-bottom: 2vw; 
 `;
 
-const Genres = ({ loadSlider, data, saveBookInfo }) => {
+const Genres = ({ /*loadSlider, data,*/ saveBookInfo }) => {
   const [button, clickButton] = useState(false);
   const [genre, changeGenre] = useState('');
+  const [data, setData] = useState([]);
 
   const handleClick = (e) => {
     changeGenre(e.target.name);
     clickButton(true);
+  };
+
+  const loadSlider = (genre) => {
+    axios.get(`api/books/${genre}`)
+      .then((response) => {
+        // filter data with only those that have volumeinfo
+        const books = response.data.filter(
+          (book) => book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail,
+        );
+        setData(books);
+      })
+      .catch((error) => {
+      });
   };
 
   useEffect(() => {
@@ -47,7 +62,9 @@ const Genres = ({ loadSlider, data, saveBookInfo }) => {
 
   const changeGenres = () => {
     clickButton(false);
+    changeGenre('');
   };
+
 
   return (
     <GenreBox>
