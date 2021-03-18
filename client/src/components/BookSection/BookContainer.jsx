@@ -71,8 +71,6 @@ const BookContainer = ({ data, click, saveBookInfo }) => {
     click();
   };
 
-  console.log(books[bookIndex], 'inside bookcontainer');
-
   const currentBook = books[bookIndex];
 
   const nextBook = () => {
@@ -92,6 +90,7 @@ const BookContainer = ({ data, click, saveBookInfo }) => {
     bookResult.liked = false;
     saveBookInfo(bookResult);
     nextBook();
+    console.log('savedisliked called');
   };
 
   const saveLiked = (e) => {
@@ -105,7 +104,24 @@ const BookContainer = ({ data, click, saveBookInfo }) => {
     bookResult.liked = true;
     saveBookInfo(bookResult);
     nextBook();
+    console.log('saveliked called');
   };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'ArrowLeft') {
+      saveDisliked();
+    }
+    if (e.key === 'ArrowRight') {
+      saveLiked();
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('keypress', handleKeyPress);
+    return () => {
+      window.removeEventListener('keypress', handleKeyPress);
+    };
+  }, []);
 
   return (
     <div>
