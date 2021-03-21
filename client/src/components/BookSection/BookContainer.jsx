@@ -108,18 +108,21 @@ const BookContainer = ({ data, click, saveBookInfo }) => {
   };
 
   const handleKeyPress = (e) => {
+    console.log('keypress initiated');
     if (e.key === 'ArrowLeft') {
+      console.log('left called');
       saveDisliked();
     }
     if (e.key === 'ArrowRight') {
+      console.log('right called');
       saveLiked();
     }
   };
 
   useEffect(() => {
-    window.addEventListener('keypress', handleKeyPress);
+    window.addEventListener('keydown', handleKeyPress);
     return () => {
-      window.removeEventListener('keypress', handleKeyPress);
+      window.removeEventListener('keydown', handleKeyPress);
     };
   }, []);
 

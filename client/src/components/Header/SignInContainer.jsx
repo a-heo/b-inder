@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import SignIn from './SignIn';
-import NewLogin from './NewLogin';
+import SignIn from '../SignIn';
+import NewLogin from '../NewLogin';
 
 const Box = styled.div`
     display: flex;

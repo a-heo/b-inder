@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import CheckList from './CheckList';
 import Login from './Login';
@@ -7,9 +7,31 @@ import Login from './Login';
 const Header = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  ${'' /* justify-content: flex-end; */}
   background-color: #83a95c;
-  margin: 1vw;
+`;
+
+function blinkingEffect() {
+  return keyframes`
+    50% {
+      color: #ffd66b;
+      box-shadow: 3px 3px 2px rgba(black, 0.15);
+    }
+  `;
+}
+
+const Logo = styled.div`
+  justify-content: flex-start;
+  font-size: 1.5vw;
+  color: #f18c8e;
+  animation: ${blinkingEffect} 7s linear infinite;
+  width: 20%;
+`;
+
+const Menu = styled.div`
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-end;
 `;
 
 const UpperHeader = ({
@@ -25,25 +47,31 @@ const UpperHeader = ({
     {login
       ? (
         <Header>
-          <CheckList list={list} setList={setList} />
-          <Login
-            login={login}
-            enterLogin={enterLogin}
-            loadUserInfo={loadUserInfo}
-            modal={modal}
-            setModal={setModal}
-          />
+          <Logo>B-INDER</Logo>
+          <Menu>
+            <CheckList list={list} setList={setList} />
+            <Login
+              login={login}
+              enterLogin={enterLogin}
+              loadUserInfo={loadUserInfo}
+              modal={modal}
+              setModal={setModal}
+            />
+          </Menu>
         </Header>
       )
       : (
         <Header>
-          <Login
-            login={login}
-            enterLogin={enterLogin}
-            loadUserInfo={loadUserInfo}
-            modal={modal}
-            setModal={setModal}
-          />
+          <Logo>B-INDER</Logo>
+          <Menu>
+            <Login
+              login={login}
+              enterLogin={enterLogin}
+              loadUserInfo={loadUserInfo}
+              modal={modal}
+              setModal={setModal}
+            />
+          </Menu>
         </Header>
       )}
   </div>

@@ -8,7 +8,7 @@ const Button = styled.button`
     border: 2px; 
     border-radius: 5px;
     font-family: 'bungee';
-    font-size: 3vw;
+    font-size: 2vw;
     cursor:pointer; 
     width: auto;
 `;

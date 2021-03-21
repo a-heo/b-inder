@@ -5,7 +5,7 @@ const Button = styled.button`
     margin: 2vw;
     justify-content: center; 
     align-items: center;
-    font-size: 3vw;
+    font-size: 2vw;
 `;
 
 const NewLogin = ({ signupModal, setSignupModal }) => (

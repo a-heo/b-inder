@@ -5,7 +5,7 @@ import axios from 'axios';
 import LoginModal from './LoginModal';
 import SignUpModal from './SignUpModal';
 import UpperHeader from './Header/UpperHeader';
-import SignInContainer from './SignInContainer';
+import SignInContainer from './Header/SignInContainer';
 import CenterContainer from './BookSection/CenterContainer';
 
 const GlobalStyle = createGlobalStyle`
@@ -16,7 +16,7 @@ const GlobalStyle = createGlobalStyle`
   }
   button {
     font-family: 'bungee';
-    font-size: 2vw;
+    font-size: 1.5vw;
     width: auto; 
     cursor:pointer; 
     background-color: #83A95C;
@@ -40,7 +40,7 @@ function blinkingEffect() {
 }
 
 const Title = styled.h1`
-    font-size: 10vw; 
+    font-size: 7vw; 
     text-align: center;
     color: #f18c8e;
     margin-bottom: 20px;
@@ -49,7 +49,7 @@ const Title = styled.h1`
 `;
 
 const SubTitle = styled.h3`
-    font-size: 2vw; 
+    font-size: 1vw; 
     text-align: center;
 `;
 
