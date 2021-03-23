@@ -1,6 +1,8 @@
+import { faDirections } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react';
-
 import styled from 'styled-components';
+
+import BookPile from './BookPile';
 
 const WholeContainer = styled.div`
   display: flex;
@@ -61,6 +63,7 @@ const BookContainer = ({ data, click, saveBookInfo }) => {
     };
     setSlider(data, () => {
       if (data.length > 0) {
+        console.log('trueeeeeeslider', data);
         startCarousel(true);
       }
     });
@@ -71,51 +74,69 @@ const BookContainer = ({ data, click, saveBookInfo }) => {
     click();
   };
 
-  const currentBook = books[bookIndex];
+  const currentBook = data[bookIndex];
 
   const nextBook = () => {
-    const resetIndex = bookIndex === books.length - 1;
+    const resetIndex = bookIndex === data.length - 1;
     const index = resetIndex ? 0 : bookIndex + 1;
     setBookIndex(index);
   };
 
-  const saveDisliked = (e) => {
-    const bookResult = {};
-    bookResult.ibsn = currentBook.volumeInfo.industryIdentifiers[0].identifier;
-    bookResult.title = currentBook.volumeInfo.title;
-    bookResult.author = currentBook.volumeInfo.authors[0];
-    bookResult.published = currentBook.volumeInfo.publishedDate;
-    bookResult.description = currentBook.volumeInfo.description;
-    bookResult.image = currentBook.volumeInfo.imageLinks.thumbnail;
-    bookResult.liked = false;
-    saveBookInfo(bookResult);
-    nextBook();
-    console.log('savedisliked called');
-  };
+  // const saveDisliked = (e) => {
+  //   const bookResult = {};
+  //   bookResult.ibsn = currentBook.volumeInfo.industryIdentifiers[0].identifier;
+  //   bookResult.title = currentBook.volumeInfo.title;
+  //   bookResult.author = currentBook.volumeInfo.authors[0];
+  //   bookResult.published = currentBook.volumeInfo.publishedDate;
+  //   bookResult.description = currentBook.volumeInfo.description;
+  //   bookResult.image = currentBook.volumeInfo.imageLinks.thumbnail;
+  //   bookResult.liked = false;
+  //   saveBookInfo(bookResult);
+  //   nextBook();
+  //   console.log('savedisliked called');
+  // };
 
-  const saveLiked = (e) => {
+  // const saveLiked = (e) => {
+  //   const bookResult = {};
+  //   bookResult.ibsn = currentBook.volumeInfo.industryIdentifiers[0].identifier;
+  //   bookResult.title = currentBook.volumeInfo.title;
+  //   bookResult.author = currentBook.volumeInfo.authors[0];
+  //   bookResult.published = currentBook.volumeInfo.publishedDate;
+  //   bookResult.description = currentBook.volumeInfo.description;
+  //   bookResult.image = currentBook.volumeInfo.imageLinks.thumbnail;
+  //   bookResult.liked = true;
+  //   saveBookInfo(bookResult);
+  //   nextBook();
+  //   console.log('saveliked called');
+  // };
+
+  const swiped = (boolean) => {
+    console.log('swiped called', boolean);
+
     const bookResult = {};
     bookResult.ibsn = currentBook.volumeInfo.industryIdentifiers[0].identifier;
-    bookResult.title = currentBook.volumeInfo.title;
+    bookResult.title =currentBook.volumeInfo.title;
     bookResult.author = currentBook.volumeInfo.authors[0];
-    bookResult.published = currentBook.volumeInfo.publishedDate;
-    bookResult.description = currentBook.volumeInfo.description;
-    bookResult.image = currentBook.volumeInfo.imageLinks.thumbnail;
-    bookResult.liked = true;
+    bookResult.published =currentBook.volumeInfo.publishedDate;
+    bookResult.description =currentBook.volumeInfo.description;
+    bookResult.image =currentBook.volumeInfo.imageLinks.thumbnail;
+    bookResult.liked = boolean;
+    console.log(bookResult, 'inside swipe of bookcontainer');
     saveBookInfo(bookResult);
     nextBook();
-    console.log('saveliked called');
   };
 
   const handleKeyPress = (e) => {
     console.log('keypress initiated');
     if (e.key === 'ArrowLeft') {
-      console.log('left called');
-      saveDisliked();
+      console.log('left called', currentBook.volumeInfo);
+      // saveDisliked();
+      swiped(false);
     }
     if (e.key === 'ArrowRight') {
-      console.log('right called');
-      saveLiked();
+      console.log('right called', currentBook.volumeInfo);
+      // saveLiked();
+      swiped(true);
     }
   };
 
@@ -141,10 +162,10 @@ const BookContainer = ({ data, click, saveBookInfo }) => {
               />
             </Container>
             <ButtonContainer>
-              <SaveButton name="false" onClick={saveDisliked}>
+              <SaveButton name="1false" onClick={() => {swiped(false)}}>
                 <Icon className="fas fa-times" />
               </SaveButton>
-              <SaveButton name="true" onClick={saveLiked}>
+              <SaveButton name="true" onClick={() => {swiped(true)}}>
                 <Icon className="far fa-heart" />
               </SaveButton>
             </ButtonContainer>

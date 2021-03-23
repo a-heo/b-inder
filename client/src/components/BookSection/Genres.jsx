@@ -43,7 +43,6 @@ const Genres = ({ /*loadSlider, data,*/ saveBookInfo }) => {
   const [fantasy, setFantasy] = useState([]);
 
   const handleClick = (e) => {
-    changeGenre(e.target.name);
     if (e.target.name === 'fiction') {
       setData(fiction);
     }
@@ -62,8 +61,16 @@ const Genres = ({ /*loadSlider, data,*/ saveBookInfo }) => {
     if (e.target.name === 'fantasy') {
       setData(fantasy);
     }
-    clickButton(true);
+    changeGenre(e.target.name);
+    // clickButton(true);
   };
+
+  useEffect(() => {
+    console.log(genre, genre.length, 'useeffect for change of genre', data);
+    if (genre.length > 1) {
+      clickButton(true);
+    }
+  }, [data]);
 
   //original
   // const loadSlider = (genre) => {
