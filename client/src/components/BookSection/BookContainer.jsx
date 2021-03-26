@@ -2,8 +2,6 @@ import { faDirections } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import BookPile from './BookPile';
-
 const WholeContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -50,6 +48,7 @@ const Image = styled.img`
   width: 15vw;
   height: 25vw;
 `;
+
 
 const BookContainer = ({ data, click, saveBookInfo }) => {
   const [books, setBooks] = useState([]);

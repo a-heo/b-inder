@@ -8,8 +8,6 @@ import UpperHeader from './Header/UpperHeader';
 import SignInContainer from './Header/SignInContainer';
 import CenterContainer from './BookSection/CenterContainer';
 
-import Deck from './Deck';
-
 const GlobalStyle = createGlobalStyle`
   body {
     background-color: #FCF8E8;

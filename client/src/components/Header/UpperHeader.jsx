@@ -3,6 +3,7 @@ import styled, { keyframes } from 'styled-components';
 
 import CheckList from './CheckList';
 import Login from './Login';
+import Profile from './Profile';
 
 const Header = styled.div`
   display: flex;
@@ -30,6 +31,7 @@ const Logo = styled.div`
 
 const Menu = styled.div`
   width: 100%;
+  display: flex;
   flex-direction: row;
   justify-content: flex-end;
 `;
@@ -49,6 +51,7 @@ const UpperHeader = ({
         <Header>
           <Logo>B-INDER</Logo>
           <Menu>
+            <Profile />
             <CheckList list={list} setList={setList} />
             <Login
               login={login}
