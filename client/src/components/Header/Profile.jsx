@@ -68,14 +68,14 @@ const MenuSect = styled.li`
   border-bottom: 1px solid #dddddd;
 `;
 
-const Menuatt = styled.a`
+const Menuatt = styled.button`
   text-decoration: none;
   color: #333333;
   padding: 15px 20px;
   display: block;
 `;
 
-const Profile = () => {
+const Profile = ({ enterLogin, setList }) => {
   const dropDownRef = useRef(null);
   const [menu, setMenu] = useState(false);
 
@@ -94,9 +94,22 @@ const Profile = () => {
       window.removeEventListener('click', pageClick);
     };
   }, [menu]);
+
   const handleClick = (e) => {
     e.preventDefault();
     setMenu(!menu);
+  };
+
+  const handleBooks = (e) => {
+      e.preventDefault();
+      setMenu(!menu);
+      setList(true);
+  };
+
+  const handleLogout = (e) => {
+      e.preventDefault();
+      setMenu(!menu);
+      enterLogin(false);
   };
 
   return (
@@ -106,8 +119,8 @@ const Profile = () => {
         <MenuLine>
           <MenuSect>
             <Menuatt>info</Menuatt>
-            <Menuatt>my books</Menuatt>
-            <Menuatt>logout</Menuatt>
+            <Menuatt onClick={handleBooks}>my books</Menuatt>
+            <Menuatt onClick={handleLogout}>logout</Menuatt>
           </MenuSect>
         </MenuLine>
       </Menu>

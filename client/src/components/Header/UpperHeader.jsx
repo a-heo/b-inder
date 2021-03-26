@@ -51,15 +51,15 @@ const UpperHeader = ({
         <Header>
           <Logo>B-INDER</Logo>
           <Menu>
-            <Profile />
-            <CheckList list={list} setList={setList} />
+            <Profile enterLogin={enterLogin} setList={setList} />
+            {/* <CheckList list={list} setList={setList} />
             <Login
               login={login}
               enterLogin={enterLogin}
               loadUserInfo={loadUserInfo}
               modal={modal}
               setModal={setModal}
-            />
+            /> */}
           </Menu>
         </Header>
       )
