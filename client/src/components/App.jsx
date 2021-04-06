@@ -62,23 +62,9 @@ const App = () => {
   const [userBooks, changeUserBooks] = useState([]);
   const [modal, setModal] = useState(false);
   const [list, setList] = useState(false);
+  const [profile, showProfile] = useState(false);
   const [signupModal, setSignupModal] = useState(false);
   const [failMsg, setFailMsg] = useState(false);
-
-  // const loadSlider = (genre) => {
-  //   axios.get(`api/books/${genre}`)
-  //     .then((response) => {
-  //       // filter data with only those that have volumeinfo
-  //       const books = response.data.filter(
-  //         (book) => book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail,
-  //       );
-
-  //       setData(books);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error, 'loadslider unable to be retrieve');
-  //     });
-  // };
 
   const loadUserBooks = (userData) => {
     axios.get(`api/${userData.user}/${userData.pw}/info`)
@@ -168,14 +154,17 @@ const App = () => {
             setModal={setModal}
             list={list}
             setList={setList}
+            user={user}
+            profile={profile}
+            showProfile={showProfile}
           />
           <CenterContainer
             data={data}
-            // loadSlider={loadSlider}
             saveBookInfo={saveBookInfo}
             userBooks={userBooks}
             user={user}
             list={list}
+            profile={profile}
           />
         </div>
       )

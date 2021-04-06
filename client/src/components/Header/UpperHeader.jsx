@@ -3,7 +3,7 @@ import styled, { keyframes } from 'styled-components';
 
 import CheckList from './CheckList';
 import Login from './Login';
-import Profile from './Profile';
+import DropDownMenu from './DropDownMenu';
 
 const Header = styled.div`
   display: flex;
@@ -65,34 +65,34 @@ const UpperHeader = ({
   loadUserInfo,
   modal,
   setModal,
+  user,
+  showProfile,
+  profile
 }) => (
   <div>
     {login
       ? (
         <Header>
           <Logo>
-            <LogoButton onClick={() => {setList(false)}}>
-            B-INDER
+            <LogoButton onClick={() => { setList(false); }}>
+              B-INDER
             </LogoButton>
           </Logo>
           <Menu>
-            <Profile enterLogin={enterLogin} setList={setList} />
-            {/* <CheckList list={list} setList={setList} />
-            <Login
-              login={login}
+            <DropDownMenu
+              showProfile={showProfile}
               enterLogin={enterLogin}
-              loadUserInfo={loadUserInfo}
-              modal={modal}
-              setModal={setModal}
-            /> */}
+              setList={setList}
+              user={user}
+            />
           </Menu>
         </Header>
       )
       : (
         <Header>
           <Logo>
-            <LogoButton onClick={() => {setList(false)}}>
-            B-INDER
+            <LogoButton onClick={() => { setList(false); }}>
+              B-INDER
             </LogoButton>
           </Logo>
           <Menu>

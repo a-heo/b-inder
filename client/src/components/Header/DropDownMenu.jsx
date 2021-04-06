@@ -76,7 +76,7 @@ const Menuatt = styled.button`
   display: block;
 `;
 
-const Profile = ({ enterLogin, setList }) => {
+const DropDownMenu = ({ enterLogin, setList, user, showProfile }) => {
   const dropDownRef = useRef(null);
   const [menu, setMenu] = useState(false);
 
@@ -102,26 +102,36 @@ const Profile = ({ enterLogin, setList }) => {
   };
 
   const handleBooks = (e) => {
-      e.preventDefault();
-      setMenu(!menu);
-      setList(true);
+    e.preventDefault();
+    setMenu(!menu);
+    showProfile(false);
+    setList(true);
   };
 
   const handleLogout = (e) => {
-      e.preventDefault();
-      setMenu(!menu);
-      enterLogin(false);
+    e.preventDefault();
+    setMenu(!menu);
+    enterLogin(false);
+  };
+
+  const handleProfile = (e) => {
+    e.preventDefault();
+    setMenu(!menu);
+    setList(false);
+    showProfile(true);
   };
 
   return (
     <MenuContainer>
-      <Menutrigger onClick={handleClick}>Profile</Menutrigger>
+      <Menutrigger onClick={handleClick}>
+        {user}'s Info
+      </Menutrigger>
       <Menu ref={dropDownRef} menu={menu}>
         <MenuLine>
           <MenuSect>
-            <Menuatt>info</Menuatt>
-            <Menuatt onClick={handleBooks}>my books</Menuatt>
-            <Menuatt onClick={handleLogout}>logout</Menuatt>
+            <Menuatt onClick={handleProfile}>Profile</Menuatt>
+            <Menuatt onClick={handleBooks}>{user}'s Books</Menuatt>
+            <Menuatt onClick={handleLogout}>Logout</Menuatt>
           </MenuSect>
         </MenuLine>
       </Menu>
@@ -129,4 +139,4 @@ const Profile = ({ enterLogin, setList }) => {
   );
 };
 
-export default Profile;
+export default DropDownMenu;

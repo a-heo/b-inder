@@ -1,8 +1,9 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
-import BookList from '../Header/BookList';
+import BookList from '../Pages/BookList';
 import Genres from './Genres';
+import Profile from '../Pages/Profile';
 
 function blinkingEffect() {
   return keyframes`
@@ -22,15 +23,18 @@ const Title = styled.h1`
 `;
 
 const CenterContainer = ({
-  userBooks, user, list, data, loadSlider, saveBookInfo,
+  userBooks, user, list, saveBookInfo, profile
 }) => (
   <div>
-    {list ? (
+    {list && (
       <BookList userBooks={userBooks} user={user} list={list} />
-    ) : (
-      <div>
+    )}
+    {profile && (
+      <Profile />
+    )}
+    {!list && !profile && (<div>
         <Title>b-inder</Title>
-        <Genres /*data={data} loadSlider={loadSlider}*/ saveBookInfo={saveBookInfo} />
+        <Genres saveBookInfo={saveBookInfo} />
       </div>
     )}
   </div>
