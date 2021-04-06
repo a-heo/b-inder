@@ -23,10 +23,31 @@ function blinkingEffect() {
 
 const Logo = styled.div`
   justify-content: flex-start;
+  width: 20%;
+`;
+
+const LogoButton = styled.button`
+  border-radius: 90px;
+  cursor: pointer;
+  padding: 4px 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  border: none;
+  vertical-align: middle;
+  transition: box-shadow 0.4s ease;
+  margin-left: auto; /* Strictly for positioning */
+
+  &:hover {
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+  }
+span {
+  font-weight: 700;
+  vertical-align: middle;
+  font-size: 14px;
+  margin: 0 10px;
+}
   font-size: 1.5vw;
   color: #f18c8e;
   animation: ${blinkingEffect} 7s linear infinite;
-  width: 20%;
 `;
 
 const Menu = styled.div`
@@ -49,7 +70,11 @@ const UpperHeader = ({
     {login
       ? (
         <Header>
-          <Logo>B-INDER</Logo>
+          <Logo>
+            <LogoButton onClick={() => {setList(false)}}>
+            B-INDER
+            </LogoButton>
+          </Logo>
           <Menu>
             <Profile enterLogin={enterLogin} setList={setList} />
             {/* <CheckList list={list} setList={setList} />
@@ -65,7 +90,11 @@ const UpperHeader = ({
       )
       : (
         <Header>
-          <Logo>B-INDER</Logo>
+          <Logo>
+            <LogoButton onClick={() => {setList(false)}}>
+            B-INDER
+            </LogoButton>
+          </Logo>
           <Menu>
             <Login
               login={login}

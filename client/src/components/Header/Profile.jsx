@@ -65,6 +65,7 @@ const MenuLine = styled.ul`
 `;
 
 const MenuSect = styled.li`
+  align-items: center;
   border-bottom: 1px solid #dddddd;
 `;
 
