@@ -74,7 +74,7 @@ const UpperHeader = ({
       ? (
         <Header>
           <Logo>
-            <LogoButton onClick={() => { setList(false); }}>
+            <LogoButton onClick={() => { setList(false); setProfile(false); setList(false) }}>
               B-INDER
             </LogoButton>
           </Logo>

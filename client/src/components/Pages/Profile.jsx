@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Profile = () => (
+const Profile = ({ user }) => (
 <div>
-    profile
+    username: {user}
 </div>
 );
 

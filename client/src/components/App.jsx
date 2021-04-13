@@ -22,10 +22,12 @@ const GlobalStyle = createGlobalStyle`
     background-color: #83A95C;
     border: 2px; 
     border-radius: 5px;
+    transition: 500ms linear; 
     &:hover {
       font-weight: 900;
       background-color: #ff6c60;
       box-shadow: 5px 5px 3px rgba(black, 0.25);
+      transform: scale(1.1);
     }
   }
 `;
@@ -39,13 +41,23 @@ function blinkingEffect() {
   `;
 }
 
+const bounce = keyframes`
+    0% {transform: translateY(0);}
+    25% {transform: translateY(-15px);}
+    50% {transform: translateY(0);}
+    75% {transform: translateY(-10px);}
+    100% {transform: translateY(0);}
+`;
+
 const Title = styled.h1`
     font-size: 7vw; 
     text-align: center;
     color: #f18c8e;
     margin-bottom: 20px;
     animation: ${blinkingEffect} 7s linear infinite;
-
+    &:hover {
+      animation: ${bounce} 1s ease;
+    }
 `;
 
 const SubTitle = styled.h3`

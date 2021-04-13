@@ -5,13 +5,17 @@ import BookList from '../Pages/BookList';
 import Genres from './Genres';
 import Profile from '../Pages/Profile';
 
-function blinkingEffect() {
-  return keyframes`
+const blinkingEffect = keyframes`
     50% {
       color: #ffd66b;
     }
   `;
-}
+
+const bounce = keyframes`
+    0% {transform: translateY(0);}
+    50% {transform: translateY(-25px);}
+    100% {transform: translateY(0);}
+`;
 
 const Title = styled.h1`
     font-size: 6vw; 
@@ -19,7 +23,9 @@ const Title = styled.h1`
     color: #f18c8e;
     margin-bottom: 5vw;
     animation: ${blinkingEffect} 7s linear infinite;
-
+    &:hover {
+      animation: ${bounce} 3s ease;
+    }
 `;
 
 const CenterContainer = ({
@@ -30,7 +36,7 @@ const CenterContainer = ({
       <BookList userBooks={userBooks} user={user} list={list} />
     )}
     {profile && (
-      <Profile />
+      <Profile user={user} />
     )}
     {!list && !profile && (<div>
         <Title>b-inder</Title>
