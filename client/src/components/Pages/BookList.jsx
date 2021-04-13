@@ -24,6 +24,9 @@ const Title = styled.div`
   font-size: 1.5vw;
 `;
 
+const BookDesc = styled.td`
+  font-family: 'Montserrat';
+`;
 const BookList = ({ userBooks, user, list }) => {
   const replaceTitle = (text) => {
     if (userBooks.length > 1) {
@@ -64,7 +67,7 @@ const BookList = ({ userBooks, user, list }) => {
                       </div>
                     </TitleCell>
                     {/* <td>{`${book.title} ${book.author} ${book.published}`}</td> */}
-                    <td>{book.description}</td>
+                    <BookDesc>{book.description}</BookDesc>
                     <td>
                       <a href={`https://www.powells.com/book/${replaceTitle(book.title)}-${book.isbn}`}>
                         <button type="button">Buy Book</button>

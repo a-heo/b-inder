@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 
-import BookContainer from './BookContainer';
+import BookContainer from './v2BookContainer';
 
 const GenreBox = styled.div`
   display: flex; 
@@ -43,7 +43,6 @@ const Genres = ({ /*loadSlider, data,*/ saveBookInfo }) => {
   const [fantasy, setFantasy] = useState([]);
 
   const handleClick = (e) => {
-    changeGenre(e.target.name);
     if (e.target.name === 'fiction') {
       setData(fiction);
     }
@@ -62,8 +61,16 @@ const Genres = ({ /*loadSlider, data,*/ saveBookInfo }) => {
     if (e.target.name === 'fantasy') {
       setData(fantasy);
     }
-    clickButton(true);
+    changeGenre(e.target.name);
+    // clickButton(true);
   };
+
+  useEffect(() => {
+    console.log(genre, genre.length, 'useeffect for change of genre', data);
+    if (data.length > 0) {
+      clickButton(true);
+    }
+  }, [data, setData]);
 
   //original
   // const loadSlider = (genre) => {

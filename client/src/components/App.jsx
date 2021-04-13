@@ -22,10 +22,12 @@ const GlobalStyle = createGlobalStyle`
     background-color: #83A95C;
     border: 2px; 
     border-radius: 5px;
+    transition: 500ms linear; 
     &:hover {
       font-weight: 900;
       background-color: #ff6c60;
       box-shadow: 5px 5px 3px rgba(black, 0.25);
+      transform: scale(1.1);
     }
   }
 `;
@@ -39,13 +41,23 @@ function blinkingEffect() {
   `;
 }
 
+const bounce = keyframes`
+    0% {transform: translateY(0);}
+    25% {transform: translateY(-15px);}
+    50% {transform: translateY(0);}
+    75% {transform: translateY(-10px);}
+    100% {transform: translateY(0);}
+`;
+
 const Title = styled.h1`
     font-size: 7vw; 
     text-align: center;
     color: #f18c8e;
     margin-bottom: 20px;
     animation: ${blinkingEffect} 7s linear infinite;
-
+    &:hover {
+      animation: ${bounce} 1s ease;
+    }
 `;
 
 const SubTitle = styled.h3`
@@ -62,23 +74,9 @@ const App = () => {
   const [userBooks, changeUserBooks] = useState([]);
   const [modal, setModal] = useState(false);
   const [list, setList] = useState(false);
+  const [profile, showProfile] = useState(false);
   const [signupModal, setSignupModal] = useState(false);
   const [failMsg, setFailMsg] = useState(false);
-
-  // const loadSlider = (genre) => {
-  //   axios.get(`api/books/${genre}`)
-  //     .then((response) => {
-  //       // filter data with only those that have volumeinfo
-  //       const books = response.data.filter(
-  //         (book) => book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail,
-  //       );
-
-  //       setData(books);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error, 'loadslider unable to be retrieve');
-  //     });
-  // };
 
   const loadUserBooks = (userData) => {
     axios.get(`api/${userData.user}/${userData.pw}/info`)
@@ -168,14 +166,17 @@ const App = () => {
             setModal={setModal}
             list={list}
             setList={setList}
+            user={user}
+            profile={profile}
+            showProfile={showProfile}
           />
           <CenterContainer
             data={data}
-            // loadSlider={loadSlider}
             saveBookInfo={saveBookInfo}
             userBooks={userBooks}
             user={user}
             list={list}
+            profile={profile}
           />
         </div>
       )
