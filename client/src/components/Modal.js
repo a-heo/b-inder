@@ -26,9 +26,14 @@ const Background = styled.div`
 const ModalContainer = styled.div`
   display: flex;
   flex-direction: column;
-  position: relative;
-  height: 45%;
-  width: 40%;
+  position: fixed;
+  top: 20%;
+  left: 25%;
+  transform: translate(-50%, -50%);
+  height: 50vh;
+  max-height: 100%;
+  width: 30vw;
+  max-width: 100%;
   margin: 15% 25% 25%;
   background-color: #fefefe;
   border-radius: 12px;
