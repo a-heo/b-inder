@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
 import axios from 'axios';
 
-import LoginModal from './LoginModal';
-import SignUpModal from './SignUpModal';
+import LoginModal from './modals/LoginModal';
+import SignUpModal from './modals/SignUpModal';
 import UpperHeader from './Header/UpperHeader';
 import SignInContainer from './Header/SignInContainer';
 import CenterContainer from './BookSection/CenterContainer';

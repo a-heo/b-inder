@@ -27,11 +27,10 @@ const LoginModal = ({
     e.preventDefault();
   };
 
-
   return (
-    <Background>
+    <Background onClick={() => {changeModal(false)}}>
       {modal ? (
-        <ModalContainer>
+        <ModalContainer onClick={e => {e.stopPropagation()}}>
           <ButtonBox>
             <ExitButton type="button" onClick={() => changeModal()}>X</ExitButton>
           </ButtonBox>

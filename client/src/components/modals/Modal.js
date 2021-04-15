@@ -30,16 +30,18 @@ const ModalContainer = styled.div`
   top: 20%;
   left: 25%;
   transform: translate(-50%, -50%);
-  height: 50vh;
+  height: 60vh;
   max-height: 100%;
   width: 30vw;
   max-width: 100%;
   margin: 15% 25% 25%;
   background-color: #fefefe;
-  border-radius: 12px;
+  ${'' /* border-radius: 12px; */}
+  ${'' /* border-radius: 10% 30% 50% 70%; */}
+  border-radius: 50% 20% / 10% 40%;
   box-shadow: rgba(0,0,0,0.28) 0px 8px 28px;
   padding: 15px 15px 15px 15px;
-  font-size: 3vw;
+  font-size: 2vw;
   ${'' /* -webkit-animation-name: ${animatetop};
     -webkit-animation-duration: 0.4s; */}
     animation-name: animatetop;
@@ -79,12 +81,16 @@ const FormLabel = styled.label`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin: 1vw;
-  font-size: 2vw;
+  margin: .5vw;
+  font-size: 1vw;
 `;
 
 const Input = styled.input`
   padding: 2% 5%; 
+  font-size: 1vw;
+  border-radius: 25% 10%;
+  outline: none;
+  ${'' /* transform: rotate(30deg); */}
   &:focus {
     background-color: #ffe0d8;
     border: 1px #83a95c;
