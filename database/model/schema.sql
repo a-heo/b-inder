@@ -5,8 +5,11 @@ CREATE DATABASE binder;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
+    firstname VARCHAR (15), 
+    lastname VARCHAR (15),
     username VARCHAR (10) UNIQUE,
     pw VARCHAR (15),
+    location VARCHAR (15),
     CONSTRAINT user_pw_notnull CHECK (
     NOT (
         ( username is NULL or username = '' )

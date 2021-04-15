@@ -9,6 +9,8 @@ const SignUpModal = ({
   const [userInfo, saveUserInfo] = useState('');
   const [pwInfo, savePWInfo] = useState('');
   const [firstname, saveFirstname] = useState('');
+  const [lastname, saveLastname] = useState('');
+  const [location, setLocation] = useState('');
 
   const handleChange = (e) => {
     if (e.target.name === 'username') {
@@ -18,7 +20,13 @@ const SignUpModal = ({
       savePWInfo(e.target.value);
     }
     if (e.target.name === 'location') {
-      //save location into state
+      setLocation(e.target.name);
+    }
+    if (e.target.name === 'first') {
+      setFirstname(e.target.value);
+    }
+    if (e.target.name === 'last') {
+      setLastname(e.target.value);
     }
   };
 
@@ -26,6 +34,9 @@ const SignUpModal = ({
     const newUser = {};
     newUser.user = userInfo;
     newUser.pw = pwInfo;
+    newUser.firstname = firstname;
+    newUser.lastname = lastname;
+    newUser.location = location;
 //error message does not load. fix later
     saveNewUser(newUser)
       .then(() => {
