@@ -122,6 +122,7 @@ const App = () => {
       })
       .catch((error) => {
         setFailMsg(true);
+        alert('Username exists. Try another username.');
         console.log(error, 'user exists or could not be saved');
       });
   };

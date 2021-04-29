@@ -47,7 +47,7 @@ const BookList = ({ userBooks, user, list }) => {
                 {userBooks.map((book) => (
                   <TableRow>
                     <td>
-                      <a href={`https://www.powells.com/book/${replaceTitle(book.title)}-${book.isbn}`}>
+                      <a href={`https://www.powells.com/book/${replaceTitle(book.title)}-${book.isbn}`} target="_blank">
                         <img src={book.image} alt={book.isbn} />
                       </a>
                     </td>
@@ -69,7 +69,7 @@ const BookList = ({ userBooks, user, list }) => {
                     {/* <td>{`${book.title} ${book.author} ${book.published}`}</td> */}
                     <BookDesc>{book.description}</BookDesc>
                     <td>
-                      <a href={`https://www.powells.com/book/${replaceTitle(book.title)}-${book.isbn}`}>
+                      <a href={`https://www.powells.com/book/${replaceTitle(book.title)}-${book.isbn}`} target="_blank">
                         <button type="button">Buy Book</button>
                       </a>
                     </td>
