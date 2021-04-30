@@ -27,6 +27,10 @@ const Title = styled.div`
 const BookDesc = styled.td`
   font-family: 'Montserrat';
 `;
+
+const Link = styled.a`
+  padding: 1vw 1vw;
+`;
 const BookList = ({ userBooks, user, list }) => {
   const replaceTitle = (text) => {
     if (userBooks.length > 1) {
@@ -69,9 +73,15 @@ const BookList = ({ userBooks, user, list }) => {
                     {/* <td>{`${book.title} ${book.author} ${book.published}`}</td> */}
                     <BookDesc>{book.description}</BookDesc>
                     <td>
-                      <a href={`https://www.powells.com/book/${replaceTitle(book.title)}-${book.isbn}`} target="_blank">
-                        <button type="button">Buy Book</button>
-                      </a>
+                      <Link href={`https://www.powells.com/book/${replaceTitle(book.title)}-${book.isbn}`} target="_blank">
+                        <button type="button">Powell</button>
+                      </Link>
+                      <Link href={`https://www.pilsencommunitybooks.com/?searchtype=keyword&qs=${book.isbn}&qs_file=&q=h.tviewer&using_sb=status&qsb=keyword`} target="_blank">
+                        <button type="button">Pilsen</button>
+                      </Link>
+                      <Link href={`https://cafeconlibrosbooks.indielite.org/book/${book.isbn}`} target="_blank">
+                        <button type="button">Cafe Con Libros</button>
+                      </Link>
                     </td>
                   </TableRow>
                 ))}

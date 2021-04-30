@@ -59,19 +59,19 @@ const SignUpModal = ({
           <Form onSubmit={handleSubmit}>
             <FormLabel>
               First name:
-              <Input type="text" name="first" placeholder="first name" onChange={handleChange} />
+              <Input type="text" name="first" placeholder="first name" onChange={handleChange} required />
             </FormLabel>
             <FormLabel>
               Last name:
-              <Input type="text" name="last" placeholder="last name" onChange={handleChange} />
+              <Input type="text" name="last" placeholder="last name" onChange={handleChange} required />
             </FormLabel>
             <FormLabel>
               Username:
-              <Input type="text" name="username" placeholder="username" onChange={handleChange} />
+              <Input type="text" name="username" placeholder="username" onChange={handleChange} required />
             </FormLabel>
             <FormLabel>
               Password:
-              <Input type="password" name="pw" placeholder="password" onChange={handleChange} />
+              <Input type="password" name="pw" placeholder="password" onChange={handleChange} required />
             </FormLabel>
             <FormLabel>
               Nearest Location
