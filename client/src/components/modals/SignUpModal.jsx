@@ -10,7 +10,8 @@ const SignUpModal = ({
   const [pwInfo, savePWInfo] = useState('');
   const [firstname, saveFirstname] = useState('');
   const [lastname, saveLastname] = useState('');
-  const [location, setLocation] = useState('');
+  const [location, saveLocation] = useState('');
+  const [email, saveEmail] = useState('');
 
   const handleChange = (e) => {
     if (e.target.name === 'username') {
@@ -20,13 +21,16 @@ const SignUpModal = ({
       savePWInfo(e.target.value);
     }
     if (e.target.name === 'location') {
-      setLocation(e.target.name);
+      saveLocation(e.target.name);
     }
     if (e.target.name === 'first') {
-      setFirstname(e.target.value);
+      saveFirstname(e.target.value);
     }
     if (e.target.name === 'last') {
-      setLastname(e.target.value);
+      saveLastname(e.target.value);
+    }
+    if (e.target.name === 'email') {
+      saveEmail(e.target.value);
     }
   };
 
@@ -37,12 +41,13 @@ const SignUpModal = ({
     newUser.firstname = firstname;
     newUser.lastname = lastname;
     newUser.location = location;
+    newUser.email = email;
 //error message does not load. fix later
     saveNewUser(newUser)
-      .then(() => {
-        if (!failMsg) {
-          setSignupModal(!signupModal);
-        }
+      .then(setSignupModal(!setSignupModal))
+      .catch((e) => {
+        console.log(e, 'singupModal error in handlesubmit');
+        alert('cannot save info. try again');
       });
 
     e.preventDefault();
@@ -64,6 +69,10 @@ const SignUpModal = ({
             <FormLabel>
               Last name:
               <Input type="text" name="last" placeholder="last name" onChange={handleChange} required />
+            </FormLabel>
+            <FormLabel>
+              Email:
+              <Input type="text" name="email" placeholder="email" onChange={handleChange} required />
             </FormLabel>
             <FormLabel>
               Username:

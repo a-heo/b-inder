@@ -115,17 +115,15 @@ const App = () => {
       });
   };
 
-  const saveNewUser = (newInfo) => {
-    return axios.post('/api/user/new', newInfo)
-      .then(() => {
-        loadUserInfo(newInfo);
-      })
-      .catch((error) => {
-        setFailMsg(true);
-        alert('Username exists. Try another username.');
-        console.log(error, 'user exists or could not be saved');
-      });
-  };
+  const saveNewUser = (newInfo) => axios.post('/api/user/new', newInfo)
+    .then(() => {
+      loadUserInfo(newInfo);
+    })
+    .catch((error) => {
+      setFailMsg(true);
+      alert('Username exists. Try another username.');
+      console.log(error, 'user exists or could not be saved');
+    });
 
   const handleClick = () => {
     setModal(!modal);

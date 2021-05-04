@@ -2,7 +2,7 @@ const { Pool } = require('pg');
 
 const pool = new Pool({
   user: 'annie',
-  database: 'binder',
+  database: 'b_inder',
 });
 
 pool.connect();

@@ -73,8 +73,8 @@ app.get('/api/:user/:pw/info', (req, res) => {
 
 // make new user info
 app.post('/api/user/new', (req, res) => {
-  const query = 'INSERT INTO users (username, pw) values ($1, $2)';
-  const values = [req.body.user, req.body.pw];
+  const query = 'INSERT INTO users (username, pw, firstname, lastname, location, email) values ($1, $2, $3, $4, $5, $6)';
+  const values = [req.body.user, req.body.pw, req.body.firstname, req.body.lastname, req.body.location, req.body.email];
   db.addInfo(query, values, res);
 });
 
