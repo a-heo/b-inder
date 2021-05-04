@@ -21,7 +21,7 @@ const SignUpModal = ({
       savePWInfo(e.target.value);
     }
     if (e.target.name === 'location') {
-      saveLocation(e.target.name);
+      saveLocation(e.target.value);
     }
     if (e.target.name === 'first') {
       saveFirstname(e.target.value);
@@ -42,14 +42,7 @@ const SignUpModal = ({
     newUser.lastname = lastname;
     newUser.location = location;
     newUser.email = email;
-//error message does not load. fix later
-    saveNewUser(newUser)
-      .then(setSignupModal(!setSignupModal))
-      .catch((e) => {
-        console.log(e, 'singupModal error in handlesubmit');
-        alert('cannot save info. try again');
-      });
-
+    saveNewUser(newUser);
     e.preventDefault();
   };
 
@@ -72,7 +65,7 @@ const SignUpModal = ({
             </FormLabel>
             <FormLabel>
               Email:
-              <Input type="text" name="email" placeholder="email" onChange={handleChange} required />
+              <Input type="email" name="email" placeholder="email" onChange={handleChange} required />
             </FormLabel>
             <FormLabel>
               Username:

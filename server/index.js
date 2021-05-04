@@ -52,20 +52,19 @@ app.get('/api/books/:genre', (req, res) => {
 });
 
 // get user id
-app.get('/api/:user/:pw/id', (req, res) => {
-  const { user } = req.params;
-  const { pw } = req.params;
-  const query = `SELECT id FROM USERS WHERE users.username = '${user}' and users.pw = '${pw}' `;
+app.get('/api/userLogin', (req, res) => {
+  const { user } = req.query;
+  const { pw } = req.query;
+  const query = `SELECT * FROM USERS WHERE users.username = '${user}' and users.pw = '${pw}' `;
   db.getInfo(query, (result) => {
     res.send(result);
   });
 });
 
 // get book info for specific user
-app.get('/api/:user/:pw/info', (req, res) => {
+app.get('/api/:user/bookinfo', (req, res) => {
   const { user } = req.params;
-  const { pw } = req.params;
-  const query = `SELECT * FROM userbooks FULL JOIN users on users.id = userbooks.userid WHERE users.username = '${user}' and users.pw = '${pw}' and userbooks.liked = 't'`;
+  const query = `SELECT * FROM userbooks FULL JOIN users on users.id = userbooks.userid WHERE users.username = '${user}' and userbooks.liked = 't'`;
   db.getInfo(query, (result) => {
     res.send(result);
   });

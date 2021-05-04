@@ -70,7 +70,7 @@ const App = () => {
   const [data, setData] = useState([]);
   const [user, changeUser] = useState('');
   const [userid, updateUserid] = useState(0);
-  const [userpw, updateUserPW] = useState('');
+  const [userInfo, setUserinfo] = useState({});
   const [userBooks, changeUserBooks] = useState([]);
   const [modal, setModal] = useState(false);
   const [list, setList] = useState(false);
@@ -79,7 +79,7 @@ const App = () => {
   const [failMsg, setFailMsg] = useState(false);
 
   const loadUserBooks = (userData) => {
-    axios.get(`api/${userData.user}/${userData.pw}/info`)
+    axios.get(`api/${userData.user}/bookinfo`)
       .then((response) => {
         changeUserBooks(response.data);
       })
@@ -89,12 +89,13 @@ const App = () => {
   };
 
   const loadUserInfo = (userData) => {
-    axios.get(`api/${userData.user}/${userData.pw}/id`)
+    axios.get('api/userLogin', { params: { user: userData.user, pw: userData.pw }})
       .then((response) => {
+        console.log(response.data, 'loadUserinfo in app.js');
+        setUserinfo(response.data[0]);
         updateUserid(response.data[0].id);
       })
       .then(changeUser(userData.user))
-      .then(updateUserPW(userData.pw))
       .then(enterLogin(true))
       .then(loadUserBooks(userData))
       .catch((error) => {
@@ -116,13 +117,13 @@ const App = () => {
   };
 
   const saveNewUser = (newInfo) => axios.post('/api/user/new', newInfo)
-    .then(() => {
-      loadUserInfo(newInfo);
-    })
     .catch((error) => {
       setFailMsg(true);
       alert('Username exists. Try another username.');
       console.log(error, 'user exists or could not be saved');
+    })
+    .then(() => {
+      setSignupModal(!setSignupModal);
     });
 
   const handleClick = () => {
