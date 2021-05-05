@@ -91,7 +91,7 @@ const App = () => {
   const loadUserInfo = (userData) => {
     axios.get('api/userLogin', { params: { user: userData.user, pw: userData.pw }})
       .then((response) => {
-        console.log(response.data, 'loadUserinfo in app.js');
+        console.log(response.data[0], 'loadUserinfo in app.js');
         setUserinfo(response.data[0]);
         updateUserid(response.data[0].id);
       })
@@ -104,11 +104,11 @@ const App = () => {
   };
 
   const saveBookInfo = (bookData) => {
+    console.log(bookData, 'inside app.jsx bookdata');
     axios.post(`/api/${userid}/books/storeInfo`, bookData)
       .then(() => {
         const userData = {};
         userData.user = user;
-        userData.pw = userpw;
         loadUserBooks(userData);
       })
       .catch((error) => {

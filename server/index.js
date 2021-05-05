@@ -80,6 +80,7 @@ app.post('/api/user/new', (req, res) => {
 // put book info for specific user
 app.post('/api/:id/books/storeInfo', (req, res) => {
   const { id } = req.params;
+  console.log('post book info in index.js', req.params.id, req.body);
   const query = 'INSERT INTO userbooks (userid, isbn, title, author, published, description, image, liked) values ($1, $2, $3, $4, $5, $6, $7, $8) on conflict (userid, isbn) do update set liked = EXCLUDED.liked';
   const values = [
     id,

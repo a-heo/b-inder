@@ -134,12 +134,12 @@ const BookContainer = ({ data, click, saveBookInfo }) => {
     if (e.key === 'ArrowLeft') {
       console.log('left called', data[index].volumeInfo);
       // saveDisliked();
-      swipe('left', data[index]);
+      swiped('left', data[index]);
     }
     if (e.key === 'ArrowRight') {
       console.log('right called', data[index].volumeInfo);
       // saveLiked();
-      swipe('right', data[index]);
+      swiped('right', data[index]);
     }
   };
 
