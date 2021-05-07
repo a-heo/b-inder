@@ -124,7 +124,9 @@ const BookContainer = ({ data, click, saveBookInfo }) => {
   };
   
   const swipe = (dir) => {
-        console.log(index, 'button clicked', childRefs[index]);
+        console.log(index, 'button clicked', data[index]);
+
+        swiped(dir, data[index]);
         childRefs[index].current.swipe(dir); // Swipe the card!
   };
   
@@ -178,10 +180,10 @@ const BookContainer = ({ data, click, saveBookInfo }) => {
           </CardDiv>
             </Container>
             <ButtonContainer>
-              <SaveButton name="false" onClick={() => swipe('false')}>
+              <SaveButton name="false" onClick={() => swipe('left')}>
                 <Icon className="fas fa-times" />
               </SaveButton>
-              <SaveButton name="true" onClick={() => swipe('true')}>
+              <SaveButton name="true" onClick={() => swipe('right')}>
                 <Icon className="far fa-heart" />
               </SaveButton>
             </ButtonContainer>

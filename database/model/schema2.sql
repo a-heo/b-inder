@@ -34,6 +34,8 @@ CREATE TABLE userbooks (
     unread BOOLEAN,
         CONSTRAINT user_fk
         FOREIGN KEY (userid)
-        REFERENCES users(id)
+        REFERENCES users(id),
+        CONSTRAINT user_unique 
+        UNIQUE (userid, isbn)
 );
 
