@@ -1,13 +1,14 @@
 
-CREATE DATABASE binder;
+CREATE DATABASE b_inder;
 
-\c binder;
+\c b_inder;
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     firstname VARCHAR (15), 
     lastname VARCHAR (15),
     username VARCHAR (10) UNIQUE,
+    email VARCHAR(25) UNIQUE,
     pw VARCHAR (15),
     location VARCHAR (15),
     CONSTRAINT user_pw_notnull CHECK (
@@ -33,5 +34,8 @@ CREATE TABLE userbooks (
     unread BOOLEAN,
         CONSTRAINT user_fk
         FOREIGN KEY (userid)
-        REFERENCES users(id)
+        REFERENCES users(id),
+        CONSTRAINT user_unique 
+        UNIQUE (userid, isbn)
 );
+

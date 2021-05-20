@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
 import axios from 'axios';
 
-import LoginModal from './LoginModal';
-import SignUpModal from './SignUpModal';
+import LoginModal from './modals/LoginModal';
+import SignUpModal from './modals/SignUpModal';
 import UpperHeader from './Header/UpperHeader';
 import SignInContainer from './Header/SignInContainer';
 import CenterContainer from './BookSection/CenterContainer';
@@ -65,21 +65,31 @@ const SubTitle = styled.h3`
     text-align: center;
 `;
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'firstname':
+  }
+};
+
 const App = () => {
   const [login, enterLogin] = useState(false);
   const [data, setData] = useState([]);
   const [user, changeUser] = useState('');
   const [userid, updateUserid] = useState(0);
-  const [userpw, updateUserPW] = useState('');
   const [userBooks, changeUserBooks] = useState([]);
   const [modal, setModal] = useState(false);
   const [list, setList] = useState(false);
   const [profile, showProfile] = useState(false);
   const [signupModal, setSignupModal] = useState(false);
   const [failMsg, setFailMsg] = useState(false);
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [location, setLocation] = useState('');
+  const [email, setEmail] = useState('');
+  // const [state, dispatch] = useReducer(reducer, { firstname: '', lastname: '', location: '', email: '' });
 
   const loadUserBooks = (userData) => {
-    axios.get(`api/${userData.user}/${userData.pw}/info`)
+    axios.get(`api/${userData.user}/bookinfo`)
       .then((response) => {
         changeUserBooks(response.data);
       })
@@ -89,12 +99,15 @@ const App = () => {
   };
 
   const loadUserInfo = (userData) => {
-    axios.get(`api/${userData.user}/${userData.pw}/id`)
+    axios.get('api/userLogin', { params: { user: userData.user, pw: userData.pw } })
       .then((response) => {
         updateUserid(response.data[0].id);
+        setFirstname(response.data[0].firstname);
+        setLastname(response.data[0].lastname);
+        setEmail(response.data[0].email);
+        setLocation(response.data[0].location);
       })
       .then(changeUser(userData.user))
-      .then(updateUserPW(userData.pw))
       .then(enterLogin(true))
       .then(loadUserBooks(userData))
       .catch((error) => {
@@ -103,11 +116,11 @@ const App = () => {
   };
 
   const saveBookInfo = (bookData) => {
+    console.log(bookData, 'inside app.jsx bookdata');
     axios.post(`/api/${userid}/books/storeInfo`, bookData)
       .then(() => {
         const userData = {};
         userData.user = user;
-        userData.pw = userpw;
         loadUserBooks(userData);
       })
       .catch((error) => {
@@ -115,16 +128,15 @@ const App = () => {
       });
   };
 
-  const saveNewUser = (newInfo) => {
-    return axios.post('/api/user/new', newInfo)
-      .then(() => {
-        loadUserInfo(newInfo);
-      })
-      .catch((error) => {
-        setFailMsg(true);
-        console.log(error, 'user exists or could not be saved');
-      });
-  };
+  const saveNewUser = (newInfo) => axios.post('/api/user/new', newInfo)
+    .catch((error) => {
+      setFailMsg(true);
+      alert('Username exists. Try another username.');
+      console.log(error, 'user exists or could not be saved');
+    })
+    .then(() => {
+      setSignupModal(!setSignupModal);
+    });
 
   const handleClick = () => {
     setModal(!modal);
@@ -177,6 +189,10 @@ const App = () => {
             user={user}
             list={list}
             profile={profile}
+            firstname={firstname}
+            lastname={lastname}
+            email={email}
+            location={location}
           />
         </div>
       )

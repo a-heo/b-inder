@@ -9,7 +9,6 @@ const MenuContainer = styled.div`
 `;
 
 const Menutrigger = styled.button`
-  background: #ffffff;
   border-radius: 90px;
   cursor: pointer;
   display: flex;
@@ -38,12 +37,12 @@ img {
 `;
 
 const Menu = styled.nav`
-  background: #ffffff;
+  background-color: #83A95C;
   border-radius: 8px;
   position: absolute;
   top: 60px;
   right: 0;
-  width: 300px;
+  width: 20vw;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
   opacity: 0;
   visibility: hidden;
@@ -72,6 +71,7 @@ const MenuSect = styled.li`
 const Menuatt = styled.button`
   text-decoration: none;
   color: #333333;
+  width: 20vw;
   padding: 15px 20px;
   display: block;
 `;
