@@ -29,14 +29,19 @@ const Title = styled.h1`
 `;
 
 const CenterContainer = ({
-  userBooks, user, list, saveBookInfo, profile
+  userBooks, user, list, saveBookInfo, profile, firstname, lastname, email, location
 }) => (
   <div>
     {list && (
       <BookList userBooks={userBooks} user={user} list={list} />
     )}
     {profile && (
-      <Profile user={user} />
+      <Profile 
+        firstname={firstname}
+        lastname={lastname}
+        email={email}
+        location={location} 
+      />
     )}
     {!list && !profile && (<div>
         <Title>b-inder</Title>

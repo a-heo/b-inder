@@ -100,7 +100,7 @@ const BookContainer = ({ data, click, saveBookInfo }) => {
     click();
   };
 
-  const childRefs = useMemo(() => Array(data.length).fill(0).map(i => React.createRef()), []);
+  const childRefs = useMemo(() => Array(data.length).fill(0).map((i) => React.createRef()), []);
 
   const swiped = (direction, book) => {
     let boolean;
@@ -112,36 +112,33 @@ const BookContainer = ({ data, click, saveBookInfo }) => {
     }
     const bookResult = {};
     bookResult.ibsn = book.volumeInfo.industryIdentifiers[0].identifier;
-    bookResult.title =book.volumeInfo.title;
+    bookResult.title = book.volumeInfo.title;
     bookResult.author = book.volumeInfo.authors[0];
-    bookResult.published =book.volumeInfo.publishedDate;
-    bookResult.description =book.volumeInfo.description;
-    bookResult.image =book.volumeInfo.imageLinks.thumbnail;
+    bookResult.published = book.volumeInfo.publishedDate;
+    bookResult.description = book.volumeInfo.description;
+    bookResult.image = book.volumeInfo.imageLinks.thumbnail;
     bookResult.liked = boolean;
-    console.log(bookResult, 'inside swipe of bookcontainer');
     saveBookInfo(bookResult);
     setIndex(index - 1);
   };
-  
-  const swipe = (dir) => {
-        console.log(index, 'button clicked', data[index]);
 
-        swiped(dir, data[index]);
-        childRefs[index].current.swipe(dir); // Swipe the card!
+  const swipe = (dir) => {
+    console.log(index, 'button clicked', data[index]);
+    swiped(dir, data[index]);
+    childRefs[index].current.swipe(dir); // Swipe the card!
   };
-  
 
   const handleKeyPress = (e) => {
     console.log('keypress initiated');
     if (e.key === 'ArrowLeft') {
       console.log('left called', data[index].volumeInfo);
-      // saveDisliked();
-      swiped('left', data[index]);
+      // swiped('left', data[index]);
+      swipe('left');
     }
     if (e.key === 'ArrowRight') {
       console.log('right called', data[index].volumeInfo);
-      // saveLiked();
-      swiped('right', data[index]);
+      // swiped('right', data[index]);
+      swipe('right');
     }
   };
 
@@ -161,23 +158,23 @@ const BookContainer = ({ data, click, saveBookInfo }) => {
               <button type="button" onClick={handleClick}>Change Genre</button>
             </ButtonContainer>
             <Container>
-            <CardDiv>
-          <CardContainer>
-            {data.map((book, ind) =>
-              <TC>
-              <TinderCard
-                ref={childRefs[ind]}
-                key={book.name}
-                preventSwipe={[ 'up', 'down']}
-                onSwipe={(dir) => swiped(dir, data[ind])}>
-                {/* // onCardLeftScreen={() => outOfFrame(book.name)}> */}
-                <Card style={{ backgroundImage: 'url(' + book.volumeInfo.imageLinks.thumbnail + ')' }}>
-                </Card>
-              </TinderCard>
-              </TC>
-            )}
-          </CardContainer>
-          </CardDiv>
+              <CardDiv>
+                <CardContainer>
+                  {data.map((book, ind) => (
+                    <TC>
+                      <TinderCard
+                        ref={childRefs[ind]}
+                        key={book.name}
+                        preventSwipe={['up', 'down']}
+                        onSwipe={(dir) => swiped(dir, data[ind])}
+                      >
+                        {/* // onCardLeftScreen={() => outOfFrame(book.name)}> */}
+                        <Card style={{ backgroundImage: `url(${book.volumeInfo.imageLinks.thumbnail})` }} />
+                      </TinderCard>
+                    </TC>
+                  ))}
+                </CardContainer>
+              </CardDiv>
             </Container>
             <ButtonContainer>
               <SaveButton name="false" onClick={() => swipe('left')}>

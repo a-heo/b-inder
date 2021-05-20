@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import styled, { createGlobalStyle, keyframes } from 'styled-components';
 import axios from 'axios';
 
@@ -65,18 +65,28 @@ const SubTitle = styled.h3`
     text-align: center;
 `;
 
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'firstname':
+  }
+};
+
 const App = () => {
   const [login, enterLogin] = useState(false);
   const [data, setData] = useState([]);
   const [user, changeUser] = useState('');
   const [userid, updateUserid] = useState(0);
-  const [userInfo, setUserinfo] = useState({});
   const [userBooks, changeUserBooks] = useState([]);
   const [modal, setModal] = useState(false);
   const [list, setList] = useState(false);
   const [profile, showProfile] = useState(false);
   const [signupModal, setSignupModal] = useState(false);
   const [failMsg, setFailMsg] = useState(false);
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [location, setLocation] = useState('');
+  const [email, setEmail] = useState('');
+  // const [state, dispatch] = useReducer(reducer, { firstname: '', lastname: '', location: '', email: '' });
 
   const loadUserBooks = (userData) => {
     axios.get(`api/${userData.user}/bookinfo`)
@@ -89,11 +99,13 @@ const App = () => {
   };
 
   const loadUserInfo = (userData) => {
-    axios.get('api/userLogin', { params: { user: userData.user, pw: userData.pw }})
+    axios.get('api/userLogin', { params: { user: userData.user, pw: userData.pw } })
       .then((response) => {
-        console.log(response.data[0], 'loadUserinfo in app.js');
-        setUserinfo(response.data[0]);
         updateUserid(response.data[0].id);
+        setFirstname(response.data[0].firstname);
+        setLastname(response.data[0].lastname);
+        setEmail(response.data[0].email);
+        setLocation(response.data[0].location);
       })
       .then(changeUser(userData.user))
       .then(enterLogin(true))
@@ -177,6 +189,10 @@ const App = () => {
             user={user}
             list={list}
             profile={profile}
+            firstname={firstname}
+            lastname={lastname}
+            email={email}
+            location={location}
           />
         </div>
       )
